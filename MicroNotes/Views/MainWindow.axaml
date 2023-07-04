@@ -1,0 +1,94 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:MicroNotes.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="MicroNotes.Views.MainWindow"
+        xmlns:avaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/icon.png"
+        Title="µnotes">
+    <Window.Resources>
+        <StreamGeometry x:Key="MenuIcon">M2 4.5C2 4.22386 2.22386 4 2.5 4H17.5C17.7761 4 18 4.22386 18 4.5C18 4.77614 17.7761 5 17.5 5H2.5C2.22386 5 2 4.77614 2 4.5Z M2 9.5C2 9.22386 2.22386 9 2.5 9H17.5C17.7761 9 18 9.22386 18 9.5C18 9.77614 17.7761 10 17.5 10H2.5C2.22386 10 2 9.77614 2 9.5Z M2.5 14C2.22386 14 2 14.2239 2 14.5C2 14.7761 2.22386 15 2.5 15H17.5C17.7761 15 18 14.7761 18 14.5C18 14.2239 17.7761 14 17.5 14H2.5Z</StreamGeometry>
+    </Window.Resources>
+    <Window.Styles>
+        <Style Selector="#TitleBox:focus /template/ Border#PART_BorderElement">
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+    </Window.Styles>
+    <Grid ColumnDefinitions="250, 1, *">
+        <Grid Grid.Column="0" 
+              RowDefinitions="Auto, *">
+            <ScrollViewer Grid.Row="1">
+                <ListBox x:Name="ListBox" 
+                         Items="{Binding Notes}" 
+                         SelectedItem="{Binding SelectedNote}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock FontWeight="Bold" 
+                                           IsVisible="{Binding HasUnsavedChanges}"
+                                           Text="{Binding OriginalTitle}" />
+                                <TextBlock IsVisible="{Binding !HasUnsavedChanges}" 
+                                           Text="{Binding OriginalTitle}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+            <Grid Grid.Row="0" 
+                  Background="{Binding ElementName=ListBox, Path=Background}">
+                <Menu>
+                    <MenuItem HorizontalAlignment="Right">
+                        <MenuItem.Header>
+                            <PathIcon Data="{StaticResource MenuIcon}" />
+                        </MenuItem.Header>
+                        <MenuItem Header="Save note"
+                                  IsEnabled="{Binding SelectedNote.HasUnsavedChanges, FallbackValue=false}"
+                                  Command="{Binding SaveCommand}" HotKey="Ctrl+S" InputGesture="Ctrl+S" />
+                        <MenuItem Header="New note" Command="{Binding NewCommand}" HotKey="Ctrl+N"
+                                  InputGesture="Ctrl+N"
+                                  IsVisible="{Binding FolderPath, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                        <MenuItem Header="Delete note" Command="{Binding DeleteCommand}" HotKey="Ctrl+Shift+D"
+                                  InputGesture="Ctrl+Shift+D"
+                                  IsVisible="{Binding FolderPath, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                        <MenuItem Header="Open folder" Command="{Binding OpenFolderCommand}" HotKey="Ctrl+O"
+                                  InputGesture="Ctrl+O" HorizontalAlignment="Right" />
+                    </MenuItem>
+                </Menu>
+            </Grid>
+        </Grid>
+        <GridSplitter Grid.Column="1" 
+                      Background="LightGray" 
+                      ResizeDirection="Columns" />
+        <Grid Grid.Column="2" 
+              IsVisible="{Binding SelectedNote, Converter={x:Static ObjectConverters.IsNull}}">
+            <TextBlock VerticalAlignment="Center" 
+                       HorizontalAlignment="Center" 
+                       FontSize="18" 
+                       FontWeight="Bold" 
+                       Text="µnotes"/>
+        </Grid>
+        <Grid IsVisible="{Binding SelectedNote, Converter={x:Static ObjectConverters.IsNotNull}}"
+              Grid.Column="2"
+              Margin="8,4"
+              RowDefinitions="Auto, *">
+            <TextBox x:Name="TitleBox" 
+                     Padding="0"
+                     CornerRadius="0"
+                     Grid.Row="0"
+                     Text="{Binding SelectedNote.Title, FallbackValue=''}"
+                     FontWeight="Bold"
+                     BorderThickness="0"
+                     VerticalContentAlignment="Center"
+                     FontSize="18" />
+            <avaloniaEdit:TextEditor Grid.Row="1"
+                                     IsVisible="{Binding SelectedNote.Document, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                     Document="{Binding SelectedNote.Document}"
+                                     VerticalScrollBarVisibility="Auto"
+                                     HorizontalScrollBarVisibility="Auto"
+                                     FontFamily="Cascadia Code,Consolas,Menlo,Monospace" />
+        </Grid>
+    </Grid>
+</Window>
