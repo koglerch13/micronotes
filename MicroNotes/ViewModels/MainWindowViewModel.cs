@@ -16,6 +16,7 @@ namespace MicroNotes.ViewModels;
 // TODO:
 // Persist folder
 // Save all
+// Persist window size & separator width
 // Icon
 
 public class MainWindowViewModel : ViewModelBase
@@ -77,8 +78,8 @@ public class MainWindowViewModel : ViewModelBase
 
         var result = await MessageBoxManager.GetMessageBoxStandardWindow("Unsaved changes",
                 "You have unsaved changes. These will be lost if you close the application now.\nDo you really want to quit?",
-                ButtonEnum.YesNo, Icon.Question)
-            .Show();
+                ButtonEnum.YesNo, Icon.Question, WindowStartupLocation.CenterOwner)
+            .Show(_mainWindow);
         if (result == ButtonResult.Yes) _desktop.Shutdown();
     }
 
@@ -91,8 +92,8 @@ public class MainWindowViewModel : ViewModelBase
         if (Notes.Any(x => x.OriginalTitle == SelectedNote.Title && x != SelectedNote))
         {
             await MessageBoxManager.GetMessageBoxStandardWindow("File already exists.",
-                    "A file with this title already exists. Please choose another title.", ButtonEnum.Ok, Icon.Error)
-                .Show();
+                    "A file with this title already exists. Please choose another title.", ButtonEnum.Ok, Icon.Error, WindowStartupLocation.CenterOwner)
+                .Show(_mainWindow);
             return;
         }
 
@@ -130,8 +131,8 @@ public class MainWindowViewModel : ViewModelBase
 
         var result = await MessageBoxManager.GetMessageBoxStandardWindow("Delete?",
                 $"Do you want to delete the note called '{SelectedNote.OriginalTitle}'?", ButtonEnum.YesNo,
-                Icon.Question)
-            .Show();
+                Icon.Question, WindowStartupLocation.CenterOwner)
+            .Show(_mainWindow);
 
         if (result == ButtonResult.Yes)
         {
@@ -164,7 +165,7 @@ public class MainWindowViewModel : ViewModelBase
         {
             var title = Path.GetFileNameWithoutExtension(file.Name);
             return new Note(file.FullName, title);
-        });
+        }).OrderBy(x => x.Title);
 
         Notes = new ObservableCollectionExtended<Note>(notes);
         SelectedNote = null;

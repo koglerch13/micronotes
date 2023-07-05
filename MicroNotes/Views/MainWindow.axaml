@@ -7,6 +7,8 @@
         x:Class="MicroNotes.Views.MainWindow"
         xmlns:avaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
         x:DataType="vm:MainWindowViewModel"
+		Width="1100"
+		Height="700"
         Icon="/Assets/icon.png"
         Title="µnotes">
     <Window.Resources>
@@ -84,11 +86,13 @@
                      VerticalContentAlignment="Center"
                      FontSize="18" />
             <avaloniaEdit:TextEditor Grid.Row="1"
+									 WordWrap="True"
                                      IsVisible="{Binding SelectedNote.Document, Converter={x:Static ObjectConverters.IsNotNull}}"
                                      Document="{Binding SelectedNote.Document}"
                                      VerticalScrollBarVisibility="Auto"
-                                     HorizontalScrollBarVisibility="Auto"
-                                     FontFamily="Cascadia Code,Consolas,Menlo,Monospace" />
+                                     HorizontalScrollBarVisibility="Disabled"
+									 FontSize="16"
+                                     FontFamily="Consolas,Menlo,Monospace" />
         </Grid>
     </Grid>
 </Window>
