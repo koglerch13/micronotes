@@ -24,7 +24,7 @@
               RowDefinitions="Auto, *">
             <ScrollViewer Grid.Row="1">
                 <ListBox x:Name="ListBox" 
-                         Items="{Binding Notes}" 
+                         ItemsSource="{Binding Notes}" 
                          SelectedItem="{Binding SelectedNote}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>

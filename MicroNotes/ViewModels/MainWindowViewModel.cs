@@ -1,10 +1,12 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Platform.Storage;
 using AvaloniaEdit.Document;
 using DynamicData.Binding;
 using MsBox.Avalonia;
@@ -147,13 +149,18 @@ public class MainWindowViewModel : ViewModelBase
 
     private async Task OpenFolder()
     {
-        var dialog = new OpenFolderDialog { Directory = FolderPath };
+        var defaultFolder = !string.IsNullOrEmpty(FolderPath) ? await _mainWindow.StorageProvider.TryGetFolderFromPathAsync(new Uri(FolderPath)) : null;
+        var result = await _mainWindow.StorageProvider.OpenFolderPickerAsync(new Avalonia.Platform.Storage.FolderPickerOpenOptions { SuggestedStartLocation = defaultFolder, AllowMultiple = false });
 
-        var result = await dialog.ShowAsync(_mainWindow);
+        if (result.Count != 1)
+            return;
 
-        if (string.IsNullOrEmpty(result)) return;
+        var folderPath = result.First().TryGetLocalPath();
 
-        FolderPath = result;
+        if (string.IsNullOrEmpty(folderPath))
+            return;
+
+        FolderPath = folderPath;
         LoadFiles();
     }
 
