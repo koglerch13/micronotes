@@ -7,8 +7,8 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using AvaloniaEdit.Document;
 using DynamicData.Binding;
-using MessageBox.Avalonia;
-using MessageBox.Avalonia.Enums;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 using ReactiveUI;
 
 namespace MicroNotes.ViewModels;
@@ -17,7 +17,9 @@ namespace MicroNotes.ViewModels;
 // Persist folder
 // Save all
 // Persist window size & separator width
-// Icon
+// Add new note -> save -> should be ordered
+// Add new note -> focus automatically in title
+// Go to note by title shortcut
 
 public class MainWindowViewModel : ViewModelBase
 {
@@ -76,10 +78,10 @@ public class MainWindowViewModel : ViewModelBase
 
         e.Cancel = true;
 
-        var result = await MessageBoxManager.GetMessageBoxStandardWindow("Unsaved changes",
+        var result = await MessageBoxManager.GetMessageBoxStandard("Unsaved changes",
                 "You have unsaved changes. These will be lost if you close the application now.\nDo you really want to quit?",
                 ButtonEnum.YesNo, Icon.Question, WindowStartupLocation.CenterOwner)
-            .Show(_mainWindow);
+            .ShowWindowDialogAsync(_mainWindow);
         if (result == ButtonResult.Yes) _desktop.Shutdown();
     }
 
@@ -91,9 +93,9 @@ public class MainWindowViewModel : ViewModelBase
 
         if (Notes.Any(x => x.OriginalTitle == SelectedNote.Title && x != SelectedNote))
         {
-            await MessageBoxManager.GetMessageBoxStandardWindow("File already exists.",
+            await MessageBoxManager.GetMessageBoxStandard("File already exists.",
                     "A file with this title already exists. Please choose another title.", ButtonEnum.Ok, Icon.Error, WindowStartupLocation.CenterOwner)
-                .Show(_mainWindow);
+                .ShowWindowDialogAsync(_mainWindow);
             return;
         }
 
@@ -129,10 +131,10 @@ public class MainWindowViewModel : ViewModelBase
     {
         if (SelectedNote == null) return;
 
-        var result = await MessageBoxManager.GetMessageBoxStandardWindow("Delete?",
+        var result = await MessageBoxManager.GetMessageBoxStandard("Delete?",
                 $"Do you want to delete the note called '{SelectedNote.OriginalTitle}'?", ButtonEnum.YesNo,
                 Icon.Question, WindowStartupLocation.CenterOwner)
-            .Show(_mainWindow);
+            .ShowWindowDialogAsync(_mainWindow);
 
         if (result == ButtonResult.Yes)
         {
