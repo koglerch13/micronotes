@@ -17,13 +17,21 @@ using ReactiveUI;
 namespace MicroNotes.ViewModels;
 
 // TODO:
-// Save all 
-// Shortcuts work only after menu was opened
+// Better icon (Material)
 // Design (better font?)
+
+// Later:
+// Save all 
 // Go to note by title shortcut
+// Delete note with context menu
+
+// Maybe:
 // Persist window size & separator width ?
 // Persist folder ? 
 // Theme support ?
+
+// Cannot do:
+// Closing on mac hangs --> seems to be an avalonia issue
 
 public class MainWindowViewModel : ReactiveObject
 {
@@ -94,7 +102,13 @@ public class MainWindowViewModel : ReactiveObject
 
     private async Task Save()
     {
+        if (string.IsNullOrEmpty(FolderPath))
+            return;
+        
         if (SelectedNote?.Document == null)
+            return;
+
+        if (!SelectedNote.HasUnsavedChanges)
             return;
 
         if (!IsFilenameValid(SelectedNote.Title))
@@ -152,6 +166,9 @@ public class MainWindowViewModel : ReactiveObject
 
     private void New()
     {
+        if (string.IsNullOrEmpty(FolderPath))
+            return;
+        
         var newNote = new Note { OriginalTitle = "<new>", Document = new TextDocument() };
 
         Notes.Add(newNote);
@@ -163,6 +180,9 @@ public class MainWindowViewModel : ReactiveObject
 
     private async Task Delete()
     {
+        if (string.IsNullOrEmpty(FolderPath))
+            return;
+        
         if (SelectedNote == null)
             return;
 

@@ -19,6 +19,12 @@
             <Setter Property="BorderThickness" Value="0" />
         </Style>
     </Window.Styles>
+    <Window.KeyBindings>
+        <KeyBinding Gesture="Ctrl+S" Command="{Binding SaveCommand}"/>
+        <KeyBinding Gesture="Ctrl+N" Command="{Binding NewCommand}"/>
+        <KeyBinding Gesture="Ctrl+Shift+D" Command="{Binding DeleteCommand}"/>
+        <KeyBinding Gesture="Ctrl+O" Command="{Binding OpenFolderCommand}"/>
+    </Window.KeyBindings>
     <Grid ColumnDefinitions="250, 1, *">
         <Grid Grid.Column="0" 
               RowDefinitions="Auto, *">
@@ -47,16 +53,18 @@
                             <PathIcon Data="{StaticResource MenuIcon}" />
                         </MenuItem.Header>
                         <MenuItem Header="Save note"
+                                  IsVisible="{Binding FolderPath, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
                                   IsEnabled="{Binding SelectedNote.HasUnsavedChanges, FallbackValue=false}"
-                                  Command="{Binding SaveCommand}" HotKey="Ctrl+S" InputGesture="Ctrl+S" />
-                        <MenuItem Header="New note" Command="{Binding NewCommand}" HotKey="Ctrl+N"
+                                  Command="{Binding SaveCommand}" 
+                                  InputGesture="Ctrl+S" />
+                        <MenuItem Header="New note" Command="{Binding NewCommand}" 
                                   InputGesture="Ctrl+N"
                                   IsVisible="{Binding FolderPath, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
-                        <MenuItem Header="Delete note" Command="{Binding DeleteCommand}" HotKey="Ctrl+Shift+D"
+                        <MenuItem Header="Delete note" Command="{Binding DeleteCommand}"
                                   InputGesture="Ctrl+Shift+D"
                                   IsVisible="{Binding FolderPath, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
-                        <MenuItem Header="Open folder" Command="{Binding OpenFolderCommand}" HotKey="Ctrl+O"
-                                  InputGesture="Ctrl+O" HorizontalAlignment="Right" />
+                        <MenuItem Header="Open folder" Command="{Binding OpenFolderCommand}"
+                                  InputGesture="Ctrl+O" />
                     </MenuItem>
                 </Menu>
             </Grid>
