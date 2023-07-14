@@ -16,10 +16,9 @@ using ReactiveUI;
 namespace MicroNotes;
 
 // TODO:
-// Design (better font?)
 
 // Fix:
-// on mac: open note, go into text area, go into title box -> crash?
+// Style editor search
 
 // Later:
 // Save all 
@@ -32,6 +31,7 @@ namespace MicroNotes;
 // Theme support ?
 
 // Cannot do:
+// on mac: open note, go into text area, go into title box -> crash?
 // Closing on mac hangs --> seems to be an avalonia issue
 
 public class MainWindowViewModel : ReactiveObject

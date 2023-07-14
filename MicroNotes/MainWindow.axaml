@@ -108,26 +108,32 @@
         </Style>
         
         <!-- ListBox items -->
+        <Style Selector="ListBox#ListBox ListBoxItem TextBlock">
+            <Setter Property="FontSize" Value="{x:Static vm:ActiveTheme.ListItemFontSize}"/>
+        </Style>
+        
         <Style Selector="ListBox#ListBox ListBoxItem">
             <Setter Property="CornerRadius" Value="{x:Static vm:ActiveTheme.ListItemRadius}"/>
             <Setter Property="Margin" Value="{x:Static vm:ActiveTheme.ListItemMargin}"/>
             <Setter Property="Padding" Value="{x:Static vm:ActiveTheme.ListItemPadding}"/>
             <Setter Property="Background" Value="{x:Static vm:ActiveTheme.ListItemBackgroundColor}"/>
             <Setter Property="Foreground" Value="{x:Static vm:ActiveTheme.ListItemTextColor}"/>
-        </Style>
-        
-        <Style Selector="ListBox#ListBox ListBoxItem TextBlock">
-            <Setter Property="FontSize" Value="{x:Static vm:ActiveTheme.ListItemFontSize}"/>
+            <Setter Property="BorderThickness" Value="{x:Static vm:ActiveTheme.ListItemBorder}"/>
+            <Setter Property="BorderBrush" Value="{x:Static vm:ActiveTheme.ListItemBorderColor}"/>
         </Style>
         
         <Style Selector="ListBox#ListBox ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{x:Static vm:ActiveTheme.ListItemBackgroundColorHover}"/>
             <Setter Property="Foreground" Value="{x:Static vm:ActiveTheme.ListItemTextColorHover}"/>
+            <Setter Property="BorderThickness" Value="{x:Static vm:ActiveTheme.ListItemBorderHover}"/>
+            <Setter Property="BorderBrush" Value="{x:Static vm:ActiveTheme.ListItemBorderColorHover}"/>
         </Style>
         
         <Style Selector="ListBox#ListBox ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{x:Static vm:ActiveTheme.ListItemBackgroundColorSelected}"/>
             <Setter Property="Foreground" Value="{x:Static vm:ActiveTheme.ListItemTextColorSelected}"/>
+            <Setter Property="BorderThickness" Value="{x:Static vm:ActiveTheme.ListItemBorderSelected}"/>
+            <Setter Property="BorderBrush" Value="{x:Static vm:ActiveTheme.ListItemBorderColorSelected}"/>
         </Style>
         
         <!-- Content section -->
@@ -159,8 +165,8 @@
     </Window.KeyBindings>
     <Grid ColumnDefinitions="250, 1, *">
         <Grid Grid.Column="0" 
-              RowDefinitions="Auto, *">
-            <ScrollViewer Grid.Row="1">
+              RowDefinitions="*, Auto">
+            <ScrollViewer Grid.Row="0">
                 <ListBox x:Name="ListBox" 
                          ItemsSource="{Binding Notes}" 
                          SelectedItem="{Binding SelectedNote}">
@@ -177,7 +183,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </ScrollViewer>
-            <Grid Grid.Row="0" 
+            <Grid Grid.Row="1" 
                   Background="{Binding ElementName=ListBox, Path=Background}">
                 <Menu x:Name="MenuBar" 
                       HorizontalAlignment="Left">
