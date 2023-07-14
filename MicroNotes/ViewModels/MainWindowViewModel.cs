@@ -19,6 +19,9 @@ namespace MicroNotes.ViewModels;
 // TODO:
 // Design (better font?)
 
+// Fix:
+// on mac: open note, go into text area, go into title box -> crash?
+
 // Later:
 // Save all 
 // Go to note by title shortcut
@@ -40,7 +43,7 @@ public class MainWindowViewModel : ReactiveObject
 
     private ObservableCollectionExtended<Note> _notes = new();
     private Note? _selectedNote;
-
+    
     public MainWindowViewModel(MainWindow mainWindow, IClassicDesktopStyleApplicationLifetime desktop)
     {
         _mainWindow = mainWindow;

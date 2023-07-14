@@ -6,12 +6,19 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="MicroNotes.Views.MainWindow"
         xmlns:avaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
+        xmlns:editing="https://github.com/avaloniaui/avaloniaedit"
         x:DataType="vm:MainWindowViewModel"
 		Width="1100"
+        x:Name="Root"
 		Height="700"
         FontFamily="{StaticResource OpenSans}"
         Icon="/Assets/icon.png"
         Title="µnotes">
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
     <Window.Resources>
         <StreamGeometry x:Key="MenuIcon">
             M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z
@@ -21,6 +28,94 @@
         </StreamGeometry>
     </Window.Resources>
     <Window.Styles>
+        <!-- Title Box -->
+        <Style Selector="TextBox#TitleBox">
+            <Setter Property="Foreground" Value="{x:Static vm:Theme.TitleTextColor}"/>
+            <Setter Property="SelectionBrush" Value="{x:Static vm:Theme.TitleTextSelectionBackgroundColor}"/>
+            <Setter Property="SelectionForegroundBrush" Value="{x:Static vm:Theme.TitleTextSelectionColor}"/>
+        </Style>
+        
+        <Style Selector="TextBox#TitleBox:pointerover">
+            <Setter Property="Foreground" Value="{x:Static vm:Theme.TitleTextColor}"/>
+        </Style>
+        
+        <Style Selector="TextBox#TitleBox:focus">
+            <Setter Property="Foreground" Value="{x:Static vm:Theme.TitleTextColor}"/>
+        </Style>
+        
+        <!-- Content Editor -->
+        <Style Selector="avaloniaEdit|TextEditor#TextEditor">
+            <Setter Property="Foreground" Value="{x:Static vm:Theme.ContentTextColor}" />
+        </Style>
+        
+        <Style Selector="avaloniaEdit|TextEditor#TextEditor editing|TextArea">
+            <Setter Property="SelectionCornerRadius" Value="0"/>
+            <Setter Property="SelectionBrush" Value="{x:Static vm:Theme.ContentTextSelectionBackgroundColor}"/>
+            <Setter Property="SelectionForeground" Value="{x:Static vm:Theme.ContentTextSelectionColor}"/>
+        </Style>
+        
+        
+        <!-- MenuButton -->
+        <Style Selector="MenuItem#MenuButton">
+            <Setter Property="Background" Value="{x:Static vm:Theme.MenuButtonBackgroundColor}"/>
+        </Style>
+        <Style Selector="MenuItem#MenuButton Path">
+            <Setter Property="Fill" Value="{x:Static vm:Theme.MenuButtonIconColor}"/>
+        </Style>
+        
+        <Style Selector="MenuItem#MenuButton:pointerover:not(:pressed) /template/ Border#PART_LayoutRoot">
+            <Setter Property="Background" Value="{x:Static vm:Theme.MenuButtonBackgroundColorHover}"/>
+        </Style>
+        <Style Selector="MenuItem#MenuButton:pointerover:not(:pressed) Path">
+            <Setter Property="Fill" Value="{x:Static vm:Theme.MenuButtonIconColorHover}"/>
+        </Style>
+        
+        <Style Selector="MenuItem#MenuButton:pressed">
+            <Setter Property="Background" Value="{x:Static vm:Theme.MenuButtonBackgroundColorOpen}"/>
+        </Style>
+        <Style Selector="MenuItem#MenuButton:pressed Path">
+            <Setter Property="Fill" Value="{x:Static vm:Theme.MenuButtonIconColorOpen}"/>
+        </Style>
+        
+        <Style Selector="MenuItem#MenuButton:open">
+            <Setter Property="Background" Value="{x:Static vm:Theme.MenuButtonBackgroundColorOpen}"/>
+        </Style>
+        <Style Selector="MenuItem#MenuButton:open Path">
+            <Setter Property="Fill" Value="{x:Static vm:Theme.MenuButtonIconColorOpen}"/>
+        </Style>
+        
+        <!-- ListBox -->
+        <Style Selector="ListBox#ListBox">
+            <Setter Property="Background" Value="{x:Static vm:Theme.SidebarBackgroundColor}"/>
+        </Style>
+        
+        <!-- ListBox items -->
+        <Style Selector="ListBox#ListBox ListBoxItem">
+            <Setter Property="Background" Value="{x:Static vm:Theme.ListItemBackgroundColor}"/>
+            <Setter Property="Foreground" Value="{x:Static vm:Theme.ListItemTextColor}"/>
+        </Style>
+        
+        <Style Selector="ListBox#ListBox ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{x:Static vm:Theme.ListItemBackgroundColorHover}"/>
+            <Setter Property="Foreground" Value="{x:Static vm:Theme.ListItemTextColorHover}"/>
+        </Style>
+        
+        <Style Selector="ListBox#ListBox ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{x:Static vm:Theme.ListItemBackgroundColorSelected}"/>
+            <Setter Property="Foreground" Value="{x:Static vm:Theme.ListItemTextColorSelected}"/>
+        </Style>
+        
+        <!-- Content section -->
+        <Style Selector="Grid#ContentSection">
+            <Setter Property="Background" Value="{x:Static vm:Theme.ContentBackgroundColor}"/>
+        </Style>
+        
+        <!-- Splitter -->
+        <Style Selector="GridSplitter#Splitter">
+            <Setter Property="Background" Value="{x:Static vm:Theme.SplitterColor}"/>
+        </Style>
+        
+        <!-- Extra stuff (not themeable) -->
         <Style Selector="#TitleBox:focus /template/ Border#PART_BorderElement">
             <Setter Property="BorderThickness" Value="0" />
         </Style>
@@ -54,13 +149,13 @@
             <Grid Grid.Row="0" 
                   Background="{Binding ElementName=ListBox, Path=Background}">
                 <Menu>
-                    <MenuItem HorizontalAlignment="Right">
+                    <MenuItem x:Name="MenuButton" 
+                              HorizontalAlignment="Right" >
                         <MenuItem.Header>
                             <Border Width="20" Height="20">
                                 <Viewbox>
                                     <Path Height="24" Width="24"
-                                          Data="{StaticResource MenuIcon}"
-                                          Fill="Black" />
+                                          Data="{StaticResource MenuIcon}"/>
                                 </Viewbox>
                             </Border>
                         </MenuItem.Header>
@@ -81,38 +176,42 @@
                 </Menu>
             </Grid>
         </Grid>
-        <GridSplitter Grid.Column="1" 
-                      Background="LightGray" 
+        <GridSplitter x:Name="Splitter"
+                      Grid.Column="1" 
                       ResizeDirection="Columns" />
-        <Grid Grid.Column="2" 
-              IsVisible="{Binding SelectedNote, Converter={x:Static ObjectConverters.IsNull}}">
-            <TextBlock VerticalAlignment="Center" 
-                       HorizontalAlignment="Center" 
-                       FontSize="18" 
-                       FontWeight="Bold" 
-                       Text="µnotes"/>
-        </Grid>
-        <Grid IsVisible="{Binding SelectedNote, Converter={x:Static ObjectConverters.IsNotNull}}"
-              Grid.Column="2"
-              Margin="8,4"
-              RowDefinitions="Auto, *">
-            <TextBox x:Name="TitleBox" 
-                     Padding="0"
-                     CornerRadius="0"
-                     Grid.Row="0"
-                     Text="{Binding SelectedNote.Title, FallbackValue=''}"
-                     FontFamily="{StaticResource OpenSansBold}"
-                     BorderThickness="0"
-                     VerticalContentAlignment="Center"
-                     FontSize="18" />
-            <avaloniaEdit:TextEditor Grid.Row="1"
-									 WordWrap="True"
-                                     IsVisible="{Binding SelectedNote.Document, Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue={x:Null}}"
-                                     Document="{Binding SelectedNote.Document, FallbackValue={x:Null}}"
-                                     VerticalScrollBarVisibility="Auto"
-                                     HorizontalScrollBarVisibility="Disabled"
-									 FontSize="16"
-                                     FontFamily="{StaticResource Inconsolata}" />
+        <Grid Grid.Column="2" x:Name="ContentSection">
+            <Grid IsVisible="{Binding SelectedNote, Converter={x:Static ObjectConverters.IsNull}}">
+                <TextBlock x:Name="PlaceholderText"
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Center" 
+                           FontSize="18" 
+                           Text="µnotes"/>
+            </Grid>
+
+            <Grid IsVisible="{Binding SelectedNote, Converter={x:Static ObjectConverters.IsNotNull}}"
+                  RowDefinitions="Auto, *">
+                <TextBox x:Name="TitleBox" 
+                         Padding="0"
+                         CornerRadius="0"
+                         Grid.Row="0"
+                         Background="Transparent"
+                         Text="{Binding SelectedNote.Title, FallbackValue=''}"
+                         FontFamily="{StaticResource OpenSansBold}"
+                         BorderThickness="0"
+                         VerticalContentAlignment="Center"
+                         FontSize="18" 
+                />
+                <avaloniaEdit:TextEditor Grid.Row="1"
+                                         x:Name="TextEditor"
+                                         WordWrap="True"
+                                         Background="Transparent"
+                                         IsVisible="{Binding SelectedNote.Document, Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue={x:Null}}"
+                                         Document="{Binding SelectedNote.Document, FallbackValue={x:Null}}"
+                                         VerticalScrollBarVisibility="Auto"
+                                         HorizontalScrollBarVisibility="Disabled"
+                                         FontSize="16"
+                                         FontFamily="{StaticResource Inconsolata}" />
+            </Grid>
         </Grid>
     </Grid>
 </Window>
