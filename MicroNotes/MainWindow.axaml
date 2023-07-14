@@ -164,7 +164,12 @@
         <KeyBinding Gesture="Ctrl+Shift+D" Command="{Binding DeleteCommand}"/>
         <KeyBinding Gesture="Ctrl+O" Command="{Binding OpenFolderCommand}"/>
     </Window.KeyBindings>
-    <Grid ColumnDefinitions="250, 1, *">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" MinWidth="60" />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*" MinWidth="100"/>
+        </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" 
               RowDefinitions="*, Auto">
             <ScrollViewer Grid.Row="0">
