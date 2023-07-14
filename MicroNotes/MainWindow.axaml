@@ -144,6 +144,7 @@
         <!-- Splitter -->
         <Style Selector="GridSplitter#Splitter">
             <Setter Property="Background" Value="{x:Static vm:ActiveTheme.SplitterColor}"/>
+            <Setter Property="MinWidth" Value="{x:Static vm:ActiveTheme.SplitterWidth}"/>
         </Style>
         
         <!-- Placeholder -->

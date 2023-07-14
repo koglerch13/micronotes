@@ -7,6 +7,7 @@ public static class ActiveTheme
 {
     public static Brush SidebarBackgroundColor { get; } = new SolidColorBrush(Color.Parse("#2f3137"));
     public static  Brush SplitterColor { get; } = new SolidColorBrush(Color.Parse("#2f3137"));
+    public static double SplitterWidth { get; } = 4;
     public static Brush ContentBackgroundColor { get; } = new SolidColorBrush(Color.Parse("#fefffe"));
     
     public static Brush TitleTextColor { get; } = new SolidColorBrush(Color.Parse("#4b4a4a"));
