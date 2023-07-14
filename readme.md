@@ -53,3 +53,4 @@ The goal is to develop µnotes in a way that you never have to use a mouse, unle
 ### Known issues:
 - [ ] macOS crashes when text editor loses focus
 - [ ] Closing on macOS either reports a crash or hangs.
+- [ ] Message boxes do not get keyboard focus right away
