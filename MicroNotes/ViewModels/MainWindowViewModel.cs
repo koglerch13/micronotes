@@ -96,7 +96,7 @@ public class MainWindowViewModel : ReactiveObject
             .ShowWindowDialogAsync(_mainWindow);
         
         if (result == ButtonResult.Yes)
-            _desktop.Shutdown();
+            _desktop.TryShutdown();
     }
 
     private async Task Save()
