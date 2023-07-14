@@ -5,51 +5,52 @@ namespace MicroNotes.ViewModels;
 
 public static class Theme
 {
-    public static Brush SidebarBackgroundColor { get; } = new SolidColorBrush(Colors.White);
-    public static  Brush SplitterColor { get; } = new SolidColorBrush(Colors.LightGray);
-    public static Brush ContentBackgroundColor { get; } = new SolidColorBrush(Colors.White);
+    public static Brush SidebarBackgroundColor { get; } = new SolidColorBrush(Color.Parse("#2f3137"));
+    public static  Brush SplitterColor { get; } = new SolidColorBrush(Color.Parse("#2f3137"));
+    public static Brush ContentBackgroundColor { get; } = new SolidColorBrush(Color.Parse("#fefffe"));
 
-    public static Brush MenuButtonIconColor { get; } = new SolidColorBrush(Colors.Black);
-    public static Brush MenuButtonBackgroundColor { get; } = new SolidColorBrush(Colors.White);
-    public static Brush MenuButtonIconColorHover { get; } = new SolidColorBrush(Colors.Black);
-    public static Brush MenuButtonBackgroundColorHover { get; } = new SolidColorBrush(Colors.LightGray);
-    public static Brush MenuButtonIconColorOpen { get; } = new SolidColorBrush(Colors.Black);
-    public static Brush MenuButtonBackgroundColorOpen { get; } = new SolidColorBrush(Colors.Gray);
-    
-    public static Brush TitleTextColor { get; } = new SolidColorBrush(Colors.Black);
-    public static Brush TitleTextSelectionBackgroundColor { get; } = new SolidColorBrush(Colors.LightBlue);
-    public static Brush TitleTextSelectionColor { get; } = new SolidColorBrush(Colors.Black);
-    
-    public static Brush ContentTextColor { get; } = new SolidColorBrush(Colors.Black);
-    public static Brush ContentTextSelectionBackgroundColor { get; } = new SolidColorBrush(Colors.LightBlue);
-    public static Brush ContentTextSelectionColor { get; } = new SolidColorBrush(Colors.Black);
-    
-    public static Brush ListItemTextColor { get; } = new SolidColorBrush(Colors.Black);
-    public static Brush ListItemBackgroundColor { get; } = new SolidColorBrush(Colors.White);
-    
-    public static Brush ListItemTextColorHover { get; } = new SolidColorBrush(Colors.Black);
-    public static Brush ListItemBackgroundColorHover { get; } = new SolidColorBrush(Colors.LightBlue);
+    public static Brush PlaceholderTextColor { get; } = new SolidColorBrush(Color.Parse("#4b4a4a"));
 
-    public static Brush ListItemTextColorSelected { get; } = new SolidColorBrush(Colors.Black);
-    public static Brush ListItemBackgroundColorSelected { get; } = new SolidColorBrush(Colors.SkyBlue);
+    public static Brush MenuButtonIconColor { get; } = new SolidColorBrush(Color.Parse("#d1d2d4"));
+    public static Brush MenuButtonBackgroundColor { get; } = new SolidColorBrush(Color.Parse("#2f3137"));
+    public static Brush MenuButtonIconColorHover { get; } = new SolidColorBrush(Color.Parse("#e1e1e1"));
+    public static Brush MenuButtonBackgroundColorHover { get; } = new SolidColorBrush(Color.Parse("#464746"));
+    public static Brush MenuButtonIconColorOpen { get; } = new SolidColorBrush(Color.Parse("#e1e1e1"));
+    public static Brush MenuButtonBackgroundColorOpen { get; } = new SolidColorBrush(Color.Parse("#5a5b5a"));
     
-    public static Thickness ListItemMargin { get; } = new Thickness(0);
-    public static Thickness ListItemPadding { get; } = new Thickness(10,10);
-    public static CornerRadius ListItemRadius { get; } = new CornerRadius(0);
+    public static Brush TitleTextColor { get; } = new SolidColorBrush(Color.Parse("#4b4a4a"));
+    public static Brush TitleTextSelectionBackgroundColor { get; } = new SolidColorBrush(Color.Parse("#ca7d7f"));
+    public static Brush TitleTextSelectionColor { get; } = new SolidColorBrush(Color.Parse("#fefffe"));
+    
+    public static Brush ContentTextColor { get; } = new SolidColorBrush(Color.Parse("#4b4a4a"));
+    public static Brush ContentTextSelectionBackgroundColor { get; } = new SolidColorBrush(Color.Parse("#ca7d7f"));
+    public static Brush ContentTextSelectionColor { get; } = new SolidColorBrush(Color.Parse("#fefffe"));
+    
+    public static Brush ListItemTextColor { get; } = new SolidColorBrush(Color.Parse("#d1d2d4"));
+    public static Brush ListItemBackgroundColor { get; } = new SolidColorBrush(Color.Parse("#2f3137"));
+    
+    public static Brush ListItemTextColorHover { get; } = new SolidColorBrush(Color.Parse("#e1e1e1"));
+    public static Brush ListItemBackgroundColorHover { get; } = new SolidColorBrush(Color.Parse("#464746"));
 
-    public static double ListItemFontSize { get; } = 16;
-    public static double TitleFontSize { get; } = 20;
-    public static double TextFontSize { get; } = 12;
+    public static Brush ListItemTextColorSelected { get; } = new SolidColorBrush(Color.Parse("#e1e1e1"));
+    public static Brush ListItemBackgroundColorSelected { get; } = new SolidColorBrush(Color.Parse("#5a5b5a"));
+    
+    public static Thickness ListItemMargin { get; } = new Thickness(4,2,4,2);
+    public static Thickness ListItemPadding { get; } = new Thickness(8,6);
+    public static CornerRadius ListItemRadius { get; } = new CornerRadius(4);
+    public static double ListItemFontSize { get; } = 14;
+
 
     public static double PlaceholderFontSize { get; } = 18;
-    public static Brush PlaceholderTextColor { get; } = new SolidColorBrush(Colors.Black);
 
-    public static CornerRadius MenuButtonRadius { get; } = new CornerRadius(0);
-    public static double MenuButtonHeight { get; } = 24;
-    public static double MenuButtonWidth { get; } = 24;
-    public static Thickness MenuButtonPadding { get; } = new Thickness(0);
-    public static Thickness MenuButtonMargin { get; } = new Thickness(4,4,0,4);
+    public static CornerRadius MenuButtonRadius { get; } = new CornerRadius(14);
+    public static double MenuButtonHeight { get; } = 28;
+    public static double MenuButtonWidth { get; } = 28;
+    public static Thickness MenuButtonPadding { get; } = new Thickness(4);
+    public static Thickness MenuButtonMargin { get; } = new Thickness(4,4,0,8);
 
-    public static Thickness TitlePadding { get; } = new Thickness(8,4,0,8);
-    public static Thickness TextPadding { get; } = new Thickness(8,0,8,0);
+    public static Thickness TitlePadding { get; } = new Thickness(28,20,0,8);   
+    public static double TitleFontSize { get; } = 28;
+    public static Thickness TextPadding { get; } = new Thickness(28,0,28,0);
+    public static double TextFontSize { get; } = 16;
 }

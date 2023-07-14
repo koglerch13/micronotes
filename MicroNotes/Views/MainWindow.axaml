@@ -88,14 +88,14 @@
             <Setter Property="Fill" Value="{x:Static vm:Theme.MenuButtonIconColorHover}"/>
         </Style>
         
-        <Style Selector="MenuItem#MenuButton:pressed">
+        <Style Selector="MenuItem#MenuButton:pressed /template/ Border#PART_LayoutRoot">
             <Setter Property="Background" Value="{x:Static vm:Theme.MenuButtonBackgroundColorOpen}"/>
         </Style>
         <Style Selector="MenuItem#MenuButton:pressed Path">
             <Setter Property="Fill" Value="{x:Static vm:Theme.MenuButtonIconColorOpen}"/>
         </Style>
         
-        <Style Selector="MenuItem#MenuButton:open">
+        <Style Selector="MenuItem#MenuButton:open /template/ Border#PART_LayoutRoot">
             <Setter Property="Background" Value="{x:Static vm:Theme.MenuButtonBackgroundColorOpen}"/>
         </Style>
         <Style Selector="MenuItem#MenuButton:open Path">
@@ -170,7 +170,7 @@
                                 <TextBlock FontFamily="{StaticResource OpenSansBold}"
                                            IsVisible="{Binding HasUnsavedChanges}"
                                            Text="{Binding OriginalTitle}" />
-                                <TextBlock IsVisible="{Binding !HasUnsavedChanges}" 
+                                <TextBlock FontFamily="{StaticResource OpenSans}" IsVisible="{Binding !HasUnsavedChanges}" 
                                            Text="{Binding OriginalTitle}" />
                             </Grid>
                         </DataTemplate>
