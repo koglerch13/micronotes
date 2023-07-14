@@ -15,25 +15,6 @@ using ReactiveUI;
 
 namespace MicroNotes;
 
-// TODO:
-
-// Fix:
-// Style editor search
-
-// Later:
-// Save all 
-// Go to note by title shortcut
-// Delete note with context menu
-
-// Maybe:
-// Persist window size & separator width ?
-// Persist folder ? 
-// Theme support ?
-
-// Cannot do:
-// on mac: open note, go into text area, go into title box -> crash?
-// Closing on mac hangs --> seems to be an avalonia issue
-
 public class MainWindowViewModel : ReactiveObject
 {
     private readonly IClassicDesktopStyleApplicationLifetime _desktop;
