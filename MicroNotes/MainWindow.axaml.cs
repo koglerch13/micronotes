@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace MicroNotes.Views;
+namespace MicroNotes;
 
 public partial class MainWindow : Window
 {

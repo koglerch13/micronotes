@@ -9,12 +9,11 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using AvaloniaEdit.Document;
 using DynamicData.Binding;
-using MicroNotes.Views;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
 using ReactiveUI;
 
-namespace MicroNotes.ViewModels;
+namespace MicroNotes;
 
 // TODO:
 // Design (better font?)

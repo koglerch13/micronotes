@@ -3,7 +3,7 @@ using System.ComponentModel;
 using AvaloniaEdit.Document;
 using ReactiveUI;
 
-namespace MicroNotes.ViewModels;
+namespace MicroNotes;
 
 public class Note : ReactiveObject
 {

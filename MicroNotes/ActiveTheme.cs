@@ -1,9 +1,9 @@
 using Avalonia;
 using Avalonia.Media;
 
-namespace MicroNotes.ViewModels;
+namespace MicroNotes;
 
-public static class Theme
+public static class ActiveTheme
 {
     public static Brush SidebarBackgroundColor { get; } = new SolidColorBrush(Color.Parse("#2f3137"));
     public static  Brush SplitterColor { get; } = new SolidColorBrush(Color.Parse("#2f3137"));

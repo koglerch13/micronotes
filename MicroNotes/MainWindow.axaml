@@ -1,10 +1,10 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:MicroNotes.ViewModels"
+        xmlns:vm="using:MicroNotes"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="MicroNotes.Views.MainWindow"
+        x:Class="MicroNotes.MainWindow"
         xmlns:avaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
         xmlns:editing="https://github.com/avaloniaui/avaloniaedit"
         x:DataType="vm:MainWindowViewModel"
@@ -31,119 +31,119 @@
         
         <!-- Title Box -->
         <Style Selector="TextBox#TitleBox">
-            <Setter Property="Margin" Value="{x:Static vm:Theme.TitlePadding}"/>
-            <Setter Property="FontSize" Value="{x:Static vm:Theme.TitleFontSize}"/>
-            <Setter Property="Foreground" Value="{x:Static vm:Theme.TitleTextColor}"/>
-            <Setter Property="SelectionBrush" Value="{x:Static vm:Theme.TitleTextSelectionBackgroundColor}"/>
-            <Setter Property="SelectionForegroundBrush" Value="{x:Static vm:Theme.TitleTextSelectionColor}"/>
+            <Setter Property="Margin" Value="{x:Static vm:ActiveTheme.TitlePadding}"/>
+            <Setter Property="FontSize" Value="{x:Static vm:ActiveTheme.TitleFontSize}"/>
+            <Setter Property="Foreground" Value="{x:Static vm:ActiveTheme.TitleTextColor}"/>
+            <Setter Property="SelectionBrush" Value="{x:Static vm:ActiveTheme.TitleTextSelectionBackgroundColor}"/>
+            <Setter Property="SelectionForegroundBrush" Value="{x:Static vm:ActiveTheme.TitleTextSelectionColor}"/>
         </Style>
         
         <Style Selector="TextBox#TitleBox:pointerover">
-            <Setter Property="Foreground" Value="{x:Static vm:Theme.TitleTextColor}"/>
+            <Setter Property="Foreground" Value="{x:Static vm:ActiveTheme.TitleTextColor}"/>
         </Style>
         
         <Style Selector="TextBox#TitleBox:focus">
-            <Setter Property="Foreground" Value="{x:Static vm:Theme.TitleTextColor}"/>
+            <Setter Property="Foreground" Value="{x:Static vm:ActiveTheme.TitleTextColor}"/>
         </Style>
         
         <!-- Content Editor -->
         <Style Selector="avaloniaEdit|TextEditor#TextEditor">
-            <Setter Property="Padding" Value="{x:Static vm:Theme.TextPadding}"/>
-            <Setter Property="FontSize" Value="{x:Static vm:Theme.TextFontSize}"/>
-            <Setter Property="Foreground" Value="{x:Static vm:Theme.ContentTextColor}" />
+            <Setter Property="Padding" Value="{x:Static vm:ActiveTheme.TextPadding}"/>
+            <Setter Property="FontSize" Value="{x:Static vm:ActiveTheme.TextFontSize}"/>
+            <Setter Property="Foreground" Value="{x:Static vm:ActiveTheme.ContentTextColor}" />
         </Style>
         
         <Style Selector="avaloniaEdit|TextEditor#TextEditor editing|TextArea">
             <Setter Property="SelectionCornerRadius" Value="0"/>
-            <Setter Property="SelectionBrush" Value="{x:Static vm:Theme.ContentTextSelectionBackgroundColor}"/>
-            <Setter Property="SelectionForeground" Value="{x:Static vm:Theme.ContentTextSelectionColor}"/>
+            <Setter Property="SelectionBrush" Value="{x:Static vm:ActiveTheme.ContentTextSelectionBackgroundColor}"/>
+            <Setter Property="SelectionForeground" Value="{x:Static vm:ActiveTheme.ContentTextSelectionColor}"/>
         </Style>
         
         
         <!-- MenuButton -->
         <Style Selector="Menu#MenuBar">
-            <Setter Property="Height" Value="{x:Static vm:Theme.MenuButtonHeight}"/>
-            <Setter Property="Width" Value="{x:Static vm:Theme.MenuButtonWidth}"/>
-            <Setter Property="Margin" Value="{x:Static vm:Theme.MenuButtonMargin}"/>
+            <Setter Property="Height" Value="{x:Static vm:ActiveTheme.MenuButtonHeight}"/>
+            <Setter Property="Width" Value="{x:Static vm:ActiveTheme.MenuButtonWidth}"/>
+            <Setter Property="Margin" Value="{x:Static vm:ActiveTheme.MenuButtonMargin}"/>
         </Style>
         <Style Selector="MenuItem#MenuButton">
-            <Setter Property="CornerRadius" Value="{x:Static vm:Theme.MenuButtonRadius}"/>
-            <Setter Property="Background" Value="{x:Static vm:Theme.MenuButtonBackgroundColor}"/>
+            <Setter Property="CornerRadius" Value="{x:Static vm:ActiveTheme.MenuButtonRadius}"/>
+            <Setter Property="Background" Value="{x:Static vm:ActiveTheme.MenuButtonBackgroundColor}"/>
         </Style>
         
         <Style Selector="MenuItem#MenuButton">
-            <Setter Property="Height" Value="{x:Static vm:Theme.MenuButtonHeight}"/>
-            <Setter Property="Width" Value="{x:Static vm:Theme.MenuButtonWidth}"/>
-            <Setter Property="Padding" Value="{x:Static vm:Theme.MenuButtonPadding}"/>
+            <Setter Property="Height" Value="{x:Static vm:ActiveTheme.MenuButtonHeight}"/>
+            <Setter Property="Width" Value="{x:Static vm:ActiveTheme.MenuButtonWidth}"/>
+            <Setter Property="Padding" Value="{x:Static vm:ActiveTheme.MenuButtonPadding}"/>
         </Style>
         
         <Style Selector="MenuItem#MenuButton Path">
-            <Setter Property="Fill" Value="{x:Static vm:Theme.MenuButtonIconColor}"/>
+            <Setter Property="Fill" Value="{x:Static vm:ActiveTheme.MenuButtonIconColor}"/>
         </Style>
         
         <Style Selector="MenuItem#MenuButton:pointerover:not(:pressed) /template/ Border#PART_LayoutRoot">
-            <Setter Property="Background" Value="{x:Static vm:Theme.MenuButtonBackgroundColorHover}"/>
+            <Setter Property="Background" Value="{x:Static vm:ActiveTheme.MenuButtonBackgroundColorHover}"/>
         </Style>
         <Style Selector="MenuItem#MenuButton:pointerover:not(:pressed) Path">
-            <Setter Property="Fill" Value="{x:Static vm:Theme.MenuButtonIconColorHover}"/>
+            <Setter Property="Fill" Value="{x:Static vm:ActiveTheme.MenuButtonIconColorHover}"/>
         </Style>
         
         <Style Selector="MenuItem#MenuButton:pressed /template/ Border#PART_LayoutRoot">
-            <Setter Property="Background" Value="{x:Static vm:Theme.MenuButtonBackgroundColorOpen}"/>
+            <Setter Property="Background" Value="{x:Static vm:ActiveTheme.MenuButtonBackgroundColorOpen}"/>
         </Style>
         <Style Selector="MenuItem#MenuButton:pressed Path">
-            <Setter Property="Fill" Value="{x:Static vm:Theme.MenuButtonIconColorOpen}"/>
+            <Setter Property="Fill" Value="{x:Static vm:ActiveTheme.MenuButtonIconColorOpen}"/>
         </Style>
         
         <Style Selector="MenuItem#MenuButton:open /template/ Border#PART_LayoutRoot">
-            <Setter Property="Background" Value="{x:Static vm:Theme.MenuButtonBackgroundColorOpen}"/>
+            <Setter Property="Background" Value="{x:Static vm:ActiveTheme.MenuButtonBackgroundColorOpen}"/>
         </Style>
         <Style Selector="MenuItem#MenuButton:open Path">
-            <Setter Property="Fill" Value="{x:Static vm:Theme.MenuButtonIconColorOpen}"/>
+            <Setter Property="Fill" Value="{x:Static vm:ActiveTheme.MenuButtonIconColorOpen}"/>
         </Style>
         
         <!-- ListBox -->
         <Style Selector="ListBox#ListBox">
-            <Setter Property="Background" Value="{x:Static vm:Theme.SidebarBackgroundColor}"/>
+            <Setter Property="Background" Value="{x:Static vm:ActiveTheme.SidebarBackgroundColor}"/>
         </Style>
         
         <!-- ListBox items -->
         <Style Selector="ListBox#ListBox ListBoxItem">
-            <Setter Property="CornerRadius" Value="{x:Static vm:Theme.ListItemRadius}"/>
-            <Setter Property="Margin" Value="{x:Static vm:Theme.ListItemMargin}"/>
-            <Setter Property="Padding" Value="{x:Static vm:Theme.ListItemPadding}"/>
-            <Setter Property="Background" Value="{x:Static vm:Theme.ListItemBackgroundColor}"/>
-            <Setter Property="Foreground" Value="{x:Static vm:Theme.ListItemTextColor}"/>
+            <Setter Property="CornerRadius" Value="{x:Static vm:ActiveTheme.ListItemRadius}"/>
+            <Setter Property="Margin" Value="{x:Static vm:ActiveTheme.ListItemMargin}"/>
+            <Setter Property="Padding" Value="{x:Static vm:ActiveTheme.ListItemPadding}"/>
+            <Setter Property="Background" Value="{x:Static vm:ActiveTheme.ListItemBackgroundColor}"/>
+            <Setter Property="Foreground" Value="{x:Static vm:ActiveTheme.ListItemTextColor}"/>
         </Style>
         
         <Style Selector="ListBox#ListBox ListBoxItem TextBlock">
-            <Setter Property="FontSize" Value="{x:Static vm:Theme.ListItemFontSize}"/>
+            <Setter Property="FontSize" Value="{x:Static vm:ActiveTheme.ListItemFontSize}"/>
         </Style>
         
         <Style Selector="ListBox#ListBox ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="{x:Static vm:Theme.ListItemBackgroundColorHover}"/>
-            <Setter Property="Foreground" Value="{x:Static vm:Theme.ListItemTextColorHover}"/>
+            <Setter Property="Background" Value="{x:Static vm:ActiveTheme.ListItemBackgroundColorHover}"/>
+            <Setter Property="Foreground" Value="{x:Static vm:ActiveTheme.ListItemTextColorHover}"/>
         </Style>
         
         <Style Selector="ListBox#ListBox ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
-            <Setter Property="Background" Value="{x:Static vm:Theme.ListItemBackgroundColorSelected}"/>
-            <Setter Property="Foreground" Value="{x:Static vm:Theme.ListItemTextColorSelected}"/>
+            <Setter Property="Background" Value="{x:Static vm:ActiveTheme.ListItemBackgroundColorSelected}"/>
+            <Setter Property="Foreground" Value="{x:Static vm:ActiveTheme.ListItemTextColorSelected}"/>
         </Style>
         
         <!-- Content section -->
         <Style Selector="Grid#ContentSection">
-            <Setter Property="Background" Value="{x:Static vm:Theme.ContentBackgroundColor}"/>
+            <Setter Property="Background" Value="{x:Static vm:ActiveTheme.ContentBackgroundColor}"/>
         </Style>
         
         <!-- Splitter -->
         <Style Selector="GridSplitter#Splitter">
-            <Setter Property="Background" Value="{x:Static vm:Theme.SplitterColor}"/>
+            <Setter Property="Background" Value="{x:Static vm:ActiveTheme.SplitterColor}"/>
         </Style>
         
         <!-- Placeholder -->
         <Style Selector="TextBlock#PlaceholderText">
-            <Setter Property="Foreground" Value="{x:Static vm:Theme.PlaceholderTextColor}"/>
-            <Setter Property="FontSize" Value="{x:Static vm:Theme.PlaceholderFontSize}"/>
+            <Setter Property="Foreground" Value="{x:Static vm:ActiveTheme.PlaceholderTextColor}"/>
+            <Setter Property="FontSize" Value="{x:Static vm:ActiveTheme.PlaceholderFontSize}"/>
         </Style>
         
         <!-- Extra stuff (not themeable) -->
