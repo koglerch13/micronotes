@@ -7,4 +7,13 @@
         <FluentTheme/>
 		<StyleInclude Source="avares://AvaloniaEdit/Themes/Fluent/AvaloniaEdit.xaml" />
     </Application.Styles>
+	
+	<Application.Resources>
+		<FontFamily x:Key="Inconsolata">/Assets/fonts/Inconsolata-Regular.ttf#Inconsolata</FontFamily>
+		<FontFamily x:Key="InconsolataLight">/Assets/fonts/Inconsolata-Light.ttf#Inconsolata</FontFamily>
+		<FontFamily x:Key="InconsolataBold">/Assets/fonts/Inconsolata-Bold.ttf#Inconsolata</FontFamily>		
+		<FontFamily x:Key="OpenSans">/Assets/fonts/OpenSans-Regular.ttf#Open Sans</FontFamily>
+		<FontFamily x:Key="OpenSansLight">/Assets/fonts/OpenSans-Light.ttf#Open Sans</FontFamily>
+		<FontFamily x:Key="OpenSansBold">/Assets/fonts/OpenSans-Bold.ttf#Open Sans</FontFamily>
+	</Application.Resources>
 </Application>

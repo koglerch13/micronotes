@@ -9,6 +9,7 @@
         x:DataType="vm:MainWindowViewModel"
 		Width="1100"
 		Height="700"
+        FontFamily="{StaticResource OpenSans}"
         Icon="/Assets/icon.png"
         Title="µnotes">
     <Window.Resources>
@@ -40,7 +41,7 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
-                                <TextBlock FontWeight="Bold" 
+                                <TextBlock FontFamily="{StaticResource OpenSansBold}"
                                            IsVisible="{Binding HasUnsavedChanges}"
                                            Text="{Binding OriginalTitle}" />
                                 <TextBlock IsVisible="{Binding !HasUnsavedChanges}" 
@@ -100,18 +101,18 @@
                      CornerRadius="0"
                      Grid.Row="0"
                      Text="{Binding SelectedNote.Title, FallbackValue=''}"
-                     FontWeight="Bold"
+                     FontFamily="{StaticResource OpenSansBold}"
                      BorderThickness="0"
                      VerticalContentAlignment="Center"
                      FontSize="18" />
             <avaloniaEdit:TextEditor Grid.Row="1"
 									 WordWrap="True"
-                                     IsVisible="{Binding SelectedNote.Document, Converter={x:Static ObjectConverters.IsNotNull}}"
-                                     Document="{Binding SelectedNote.Document}"
+                                     IsVisible="{Binding SelectedNote.Document, Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue={x:Null}}"
+                                     Document="{Binding SelectedNote.Document, FallbackValue={x:Null}}"
                                      VerticalScrollBarVisibility="Auto"
                                      HorizontalScrollBarVisibility="Disabled"
 									 FontSize="16"
-                                     FontFamily="Consolas,Menlo,Monospace" />
+                                     FontFamily="{StaticResource Inconsolata}" />
         </Grid>
     </Grid>
 </Window>
