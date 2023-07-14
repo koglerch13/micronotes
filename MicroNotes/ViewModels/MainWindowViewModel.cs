@@ -9,6 +9,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using AvaloniaEdit.Document;
 using DynamicData.Binding;
+using MicroNotes.Views;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
 using ReactiveUI;
@@ -16,23 +17,24 @@ using ReactiveUI;
 namespace MicroNotes.ViewModels;
 
 // TODO:
-// Persist folder
-// Save all
-// Persist window size & separator width
-// Add new note -> save -> should be ordered
-// Add new note -> focus automatically in title
+// Save all 
+// Shortcuts work only after menu was opened
+// Design (better font?)
 // Go to note by title shortcut
+// Persist window size & separator width ?
+// Persist folder ? 
+// Theme support ?
 
-public class MainWindowViewModel : ViewModelBase
+public class MainWindowViewModel : ReactiveObject
 {
     private readonly IClassicDesktopStyleApplicationLifetime _desktop;
-    private readonly Window _mainWindow;
+    private readonly MainWindow _mainWindow;
     private string? _folderPath;
 
     private ObservableCollectionExtended<Note> _notes = new();
     private Note? _selectedNote;
 
-    public MainWindowViewModel(Window mainWindow, IClassicDesktopStyleApplicationLifetime desktop)
+    public MainWindowViewModel(MainWindow mainWindow, IClassicDesktopStyleApplicationLifetime desktop)
     {
         _mainWindow = mainWindow;
         _desktop = desktop;
@@ -83,7 +85,7 @@ public class MainWindowViewModel : ViewModelBase
 
         var result = await MessageBoxManager.GetMessageBoxStandard("Unsaved changes",
                 "You have unsaved changes. These will be lost if you close the application now.\nDo you really want to quit?",
-                ButtonEnum.YesNo, Icon.Question, WindowStartupLocation.CenterOwner)
+                ButtonEnum.YesNo, Icon.None, WindowStartupLocation.CenterOwner)
             .ShowWindowDialogAsync(_mainWindow);
         
         if (result == ButtonResult.Yes)
@@ -95,13 +97,19 @@ public class MainWindowViewModel : ViewModelBase
         if (SelectedNote?.Document == null)
             return;
 
-        if (string.IsNullOrEmpty(SelectedNote.Title))
+        if (!IsFilenameValid(SelectedNote.Title))
+        {
+            await MessageBoxManager.GetMessageBoxStandard("Invalid file name.",
+                    "The file name is invalid (maybe it contains invalid characters?)", ButtonEnum.Ok, Icon.None, WindowStartupLocation.CenterOwner)
+                .ShowWindowDialogAsync(_mainWindow);
+            
             return;
+        }
 
         if (Notes.Any(x => x.OriginalTitle == SelectedNote.Title && x != SelectedNote))
         {
             await MessageBoxManager.GetMessageBoxStandard("File already exists.",
-                    "A file with this title already exists. Please choose another title.", ButtonEnum.Ok, Icon.Error, WindowStartupLocation.CenterOwner)
+                    "A file with this title already exists. Please choose another title.", ButtonEnum.Ok, Icon.None, WindowStartupLocation.CenterOwner)
                 .ShowWindowDialogAsync(_mainWindow);
             
             return;
@@ -124,6 +132,22 @@ public class MainWindowViewModel : ViewModelBase
         }
 
         SelectedNote.HasUnsavedChanges = false;
+        
+        ReorderNotes();
+    }
+
+    private void ReorderNotes()
+    {
+        Notes = new ObservableCollectionExtended<Note>(Notes.OrderBy(x => x.OriginalTitle));
+    }
+
+    private bool IsFilenameValid(string filename)
+    {
+        if (string.IsNullOrEmpty(filename))
+            return false;
+
+        const string invalidCharacters = "#%&{}\\$!'\":@<>*?/,`|=}";
+        return invalidCharacters.All(character => !filename.Contains(character));
     }
 
     private void New()
@@ -133,6 +157,8 @@ public class MainWindowViewModel : ViewModelBase
         Notes.Add(newNote);
 
         SelectedNote = newNote;
+
+        _mainWindow.TitleBox.Focus();
     }
 
     private async Task Delete()
@@ -142,7 +168,7 @@ public class MainWindowViewModel : ViewModelBase
 
         var result = await MessageBoxManager.GetMessageBoxStandard("Delete?",
                 $"Do you want to delete the note called '{SelectedNote.OriginalTitle}'?", ButtonEnum.YesNo,
-                Icon.Question, WindowStartupLocation.CenterOwner)
+                Icon.None, WindowStartupLocation.CenterOwner)
             .ShowWindowDialogAsync(_mainWindow);
 
         if (result == ButtonResult.Yes)

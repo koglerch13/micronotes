@@ -5,7 +5,7 @@ using ReactiveUI;
 
 namespace MicroNotes.ViewModels;
 
-public class Note : ViewModelBase
+public class Note : ReactiveObject
 {
     private TextDocument? _document;
     private bool _hasUnsavedChanges;
@@ -84,6 +84,7 @@ public class Note : ViewModelBase
 
     private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(Title)) HasUnsavedChanges = true;
+        if (e.PropertyName == nameof(Title))
+            HasUnsavedChanges = true;
     }
 }
