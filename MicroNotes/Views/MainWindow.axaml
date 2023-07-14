@@ -28,8 +28,11 @@
         </StreamGeometry>
     </Window.Resources>
     <Window.Styles>
+        
         <!-- Title Box -->
         <Style Selector="TextBox#TitleBox">
+            <Setter Property="Margin" Value="{x:Static vm:Theme.TitlePadding}"/>
+            <Setter Property="FontSize" Value="{x:Static vm:Theme.TitleFontSize}"/>
             <Setter Property="Foreground" Value="{x:Static vm:Theme.TitleTextColor}"/>
             <Setter Property="SelectionBrush" Value="{x:Static vm:Theme.TitleTextSelectionBackgroundColor}"/>
             <Setter Property="SelectionForegroundBrush" Value="{x:Static vm:Theme.TitleTextSelectionColor}"/>
@@ -45,6 +48,8 @@
         
         <!-- Content Editor -->
         <Style Selector="avaloniaEdit|TextEditor#TextEditor">
+            <Setter Property="Padding" Value="{x:Static vm:Theme.TextPadding}"/>
+            <Setter Property="FontSize" Value="{x:Static vm:Theme.TextFontSize}"/>
             <Setter Property="Foreground" Value="{x:Static vm:Theme.ContentTextColor}" />
         </Style>
         
@@ -56,9 +61,22 @@
         
         
         <!-- MenuButton -->
+        <Style Selector="Menu#MenuBar">
+            <Setter Property="Height" Value="{x:Static vm:Theme.MenuButtonHeight}"/>
+            <Setter Property="Width" Value="{x:Static vm:Theme.MenuButtonWidth}"/>
+            <Setter Property="Margin" Value="{x:Static vm:Theme.MenuButtonMargin}"/>
+        </Style>
         <Style Selector="MenuItem#MenuButton">
+            <Setter Property="CornerRadius" Value="{x:Static vm:Theme.MenuButtonRadius}"/>
             <Setter Property="Background" Value="{x:Static vm:Theme.MenuButtonBackgroundColor}"/>
         </Style>
+        
+        <Style Selector="MenuItem#MenuButton">
+            <Setter Property="Height" Value="{x:Static vm:Theme.MenuButtonHeight}"/>
+            <Setter Property="Width" Value="{x:Static vm:Theme.MenuButtonWidth}"/>
+            <Setter Property="Padding" Value="{x:Static vm:Theme.MenuButtonPadding}"/>
+        </Style>
+        
         <Style Selector="MenuItem#MenuButton Path">
             <Setter Property="Fill" Value="{x:Static vm:Theme.MenuButtonIconColor}"/>
         </Style>
@@ -91,8 +109,15 @@
         
         <!-- ListBox items -->
         <Style Selector="ListBox#ListBox ListBoxItem">
+            <Setter Property="CornerRadius" Value="{x:Static vm:Theme.ListItemRadius}"/>
+            <Setter Property="Margin" Value="{x:Static vm:Theme.ListItemMargin}"/>
+            <Setter Property="Padding" Value="{x:Static vm:Theme.ListItemPadding}"/>
             <Setter Property="Background" Value="{x:Static vm:Theme.ListItemBackgroundColor}"/>
             <Setter Property="Foreground" Value="{x:Static vm:Theme.ListItemTextColor}"/>
+        </Style>
+        
+        <Style Selector="ListBox#ListBox ListBoxItem TextBlock">
+            <Setter Property="FontSize" Value="{x:Static vm:Theme.ListItemFontSize}"/>
         </Style>
         
         <Style Selector="ListBox#ListBox ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
@@ -113,6 +138,12 @@
         <!-- Splitter -->
         <Style Selector="GridSplitter#Splitter">
             <Setter Property="Background" Value="{x:Static vm:Theme.SplitterColor}"/>
+        </Style>
+        
+        <!-- Placeholder -->
+        <Style Selector="TextBlock#PlaceholderText">
+            <Setter Property="Foreground" Value="{x:Static vm:Theme.PlaceholderTextColor}"/>
+            <Setter Property="FontSize" Value="{x:Static vm:Theme.PlaceholderFontSize}"/>
         </Style>
         
         <!-- Extra stuff (not themeable) -->
@@ -148,11 +179,11 @@
             </ScrollViewer>
             <Grid Grid.Row="0" 
                   Background="{Binding ElementName=ListBox, Path=Background}">
-                <Menu>
-                    <MenuItem x:Name="MenuButton" 
-                              HorizontalAlignment="Right" >
+                <Menu x:Name="MenuBar" 
+                      HorizontalAlignment="Left">
+                    <MenuItem x:Name="MenuButton">
                         <MenuItem.Header>
-                            <Border Width="20" Height="20">
+                            <Border x:Name="MenuButtonBorder">
                                 <Viewbox>
                                     <Path Height="24" Width="24"
                                           Data="{StaticResource MenuIcon}"/>
@@ -184,7 +215,7 @@
                 <TextBlock x:Name="PlaceholderText"
                            VerticalAlignment="Center" 
                            HorizontalAlignment="Center" 
-                           FontSize="18" 
+                           FontFamily="{StaticResource OpenSansBold}"
                            Text="µnotes"/>
             </Grid>
 
@@ -198,9 +229,7 @@
                          Text="{Binding SelectedNote.Title, FallbackValue=''}"
                          FontFamily="{StaticResource OpenSansBold}"
                          BorderThickness="0"
-                         VerticalContentAlignment="Center"
-                         FontSize="18" 
-                />
+                         VerticalContentAlignment="Center"/>
                 <avaloniaEdit:TextEditor Grid.Row="1"
                                          x:Name="TextEditor"
                                          WordWrap="True"
@@ -209,7 +238,6 @@
                                          Document="{Binding SelectedNote.Document, FallbackValue={x:Null}}"
                                          VerticalScrollBarVisibility="Auto"
                                          HorizontalScrollBarVisibility="Disabled"
-                                         FontSize="16"
                                          FontFamily="{StaticResource Inconsolata}" />
             </Grid>
         </Grid>
