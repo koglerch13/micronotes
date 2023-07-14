@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="MicroNotes.MainWindow"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="SystemChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
         xmlns:avaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
         xmlns:editing="https://github.com/avaloniaui/avaloniaedit"
         x:DataType="vm:MainWindowViewModel"
@@ -165,12 +168,31 @@
         <KeyBinding Gesture="Ctrl+O" Command="{Binding OpenFolderCommand}"/>
     </Window.KeyBindings>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" MinWidth="60" />
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*" MinWidth="100"/>
         </Grid.ColumnDefinitions>
+        
+        <Border Grid.Row="0"
+                Grid.Column="0"
+                Background="{x:Static vm:ActiveTheme.SidebarBackgroundColor}"
+                IsHitTestVisible="False"/>
+        <Border Grid.Row="0"
+                Background="{x:Static vm:ActiveTheme.SplitterColor}"
+                Grid.Column="1"
+                IsHitTestVisible="False"/>
+        <Border Grid.Row="0"
+                Background="{x:Static vm:ActiveTheme.ContentBackgroundColor}"
+                Grid.Column="2"
+                IsHitTestVisible="False"/>
+        
         <Grid Grid.Column="0" 
+              Grid.Row="1"
               RowDefinitions="*, Auto">
             <ScrollViewer Grid.Row="0">
                 <ListBox x:Name="ListBox" 
@@ -220,9 +242,12 @@
             </Grid>
         </Grid>
         <GridSplitter x:Name="Splitter"
+                      Grid.Row="1"
                       Grid.Column="1" 
                       ResizeDirection="Columns" />
-        <Grid Grid.Column="2" x:Name="ContentSection">
+        <Grid Grid.Column="2" 
+              Grid.Row="1"
+              x:Name="ContentSection">
             <Grid IsVisible="{Binding SelectedNote, Converter={x:Static ObjectConverters.IsNull}}">
                 <TextBlock x:Name="PlaceholderText"
                            VerticalAlignment="Center" 

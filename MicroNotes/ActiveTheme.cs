@@ -13,7 +13,7 @@ public static class ActiveTheme
     public static Brush TitleTextColor { get; } = new SolidColorBrush(Color.Parse("#4b4a4a"));
     public static Brush TitleTextSelectionBackgroundColor { get; } = new SolidColorBrush(Color.Parse("#ca7d7f"));
     public static Brush TitleTextSelectionColor { get; } = new SolidColorBrush(Color.Parse("#fefffe"));
-    public static Thickness TitlePadding { get; } = new Thickness(28,20,0,8);   
+    public static Thickness TitlePadding { get; } = new Thickness(28,0,0,8);   
     public static double TitleFontSize { get; } = 28;
     
     public static Brush ContentTextColor { get; } = new SolidColorBrush(Color.Parse("#4b4a4a"));
