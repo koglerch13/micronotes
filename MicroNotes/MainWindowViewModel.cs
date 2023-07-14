@@ -176,6 +176,7 @@ public class MainWindowViewModel : ReactiveObject
 
         SelectedNote = newNote;
 
+        _mainWindow.TitleBox.SelectAll();
         _mainWindow.TitleBox.Focus();
     }
 
@@ -186,7 +187,7 @@ public class MainWindowViewModel : ReactiveObject
         
         if (SelectedNote == null)
             return;
-
+        
         var result = await MessageBoxManager.GetMessageBoxStandard("Delete?",
                 $"Do you want to delete the note called '{SelectedNote.OriginalTitle}'?", ButtonEnum.YesNo,
                 Icon.None, WindowStartupLocation.CenterOwner)

@@ -28,8 +28,10 @@ public class Note : ReactiveObject
     {
         _path = "";
         _originalTitle = "<new>";
-        _title = "";
+        _title = "<new>";
         _isNew = true;
+        
+        PropertyChanged += OnPropertyChanged;
     }
 
     public string Path
