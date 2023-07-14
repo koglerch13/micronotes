@@ -17,7 +17,6 @@ using ReactiveUI;
 namespace MicroNotes.ViewModels;
 
 // TODO:
-// Better icon (Material)
 // Design (better font?)
 
 // Later:
