@@ -47,7 +47,6 @@ The goal is to develop µnotes in a way that you never have to use a mouse, unle
 - [ ] Persist last splitter position
 - [ ] Persist last opened folder
 - [ ] Add theming support
-- [ ] "Invisible" title bar
 
 ### Known issues:
 - [ ] macOS crashes when text editor loses focus
