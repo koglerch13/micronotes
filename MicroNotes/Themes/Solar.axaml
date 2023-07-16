@@ -5,7 +5,7 @@
     <Color x:Key="SidebarBackgroundColor">#596e74</Color>
     
     <Color x:Key="SplitterColor">#b58a1d</Color>
-    <sys:Double x:Key="SplitterWidth">4</sys:Double>
+    <sys:Double x:Key="SplitterWidth">3</sys:Double>
     
     <sys:Double x:Key="PlaceholderFontSize">18</sys:Double>
     <Color x:Key="PlaceholderTextColor">#4b4a4a</Color>
