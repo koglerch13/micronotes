@@ -32,13 +32,13 @@
     <Color x:Key="ListItemBorderColor">Transparent</Color>
     <Color x:Key="ListItemBorderColorHover">Transparent</Color>
     <Color x:Key="ListItemBorderColorSelected">#d54e50</Color>
-    <Thickness x:Key="ListItemMargin">8,8,8,0</Thickness>
-    <Thickness x:Key="ListItemPadding">8,8,8,8</Thickness>
-    <Thickness x:Key="ListItemBorder">0</Thickness>
-    <Thickness x:Key="ListItemBorderHover">0</Thickness>
+    <Thickness x:Key="ListItemMargin">6,4,4,0</Thickness>
+    <Thickness x:Key="ListItemPadding">8,8,6,8</Thickness>
+    <Thickness x:Key="ListItemBorder">0,0,0,0</Thickness>
+    <Thickness x:Key="ListItemBorderHover">0,0,0,0</Thickness>
     <Thickness x:Key="ListItemBorderSelected">4,0,0,0</Thickness>
-    <CornerRadius x:Key="ListItemRadius">4</CornerRadius>
-    <sys:Double x:Key="ListItemFontSize">15</sys:Double>
+    <CornerRadius x:Key="ListItemRadius">10</CornerRadius>
+    <sys:Double x:Key="ListItemFontSize">13</sys:Double>
 
     <Color x:Key="MenuButtonIconColor">#d1d2d4</Color>
     <Color x:Key="MenuButtonBackgroundColor">#2f3137</Color>
