@@ -49,7 +49,4 @@
     <CornerRadius x:Key="MenuButtonRadius">12</CornerRadius>
     <sys:Double x:Key="MenuButtonHeight">30</sys:Double>
     <sys:Double x:Key="MenuButtonWidth">30</sys:Double>
-
-    
-    
 </ResourceDictionary>

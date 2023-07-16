@@ -1,0 +1,52 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:sys="clr-namespace:System;assembly=netstandard"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Color x:Key="SidebarBackgroundColor">#f5f5f6</Color>
+    
+    <Color x:Key="SplitterColor">#dfe1e5</Color>
+    <sys:Double x:Key="SplitterWidth">1</sys:Double>
+    
+    <sys:Double x:Key="PlaceholderFontSize">18</sys:Double>
+    <Color x:Key="PlaceholderTextColor">#242429</Color>
+    
+    <Color x:Key="TitleTextColor">#242429</Color>
+    <Color x:Key="TitleTextSelectionBackgroundColor">#4e91d8</Color>
+    <Color x:Key="TitleTextSelectionColor">#fefffe</Color>
+    <Thickness x:Key="TitlePadding">28,0,0,8</Thickness>
+    <sys:Double x:Key="TitleFontSize">24</sys:Double>
+    
+    <Color x:Key="ContentBackgroundColor">#fefffe</Color>
+    <Color x:Key="ContentTextColor">#242429</Color>
+    <Color x:Key="ContentTextSelectionBackgroundColor">#4e91d8</Color>
+    <Color x:Key="ContentTextSelectionColor">#fefffe</Color>
+    <Thickness x:Key="TextPadding">28,0,28,0</Thickness>
+    <sys:Double x:Key="TextFontSize">16</sys:Double>
+
+    <Color x:Key="ListItemTextColor">#35363a</Color>
+    <Color x:Key="ListItemBackgroundColor">#f5f5f6</Color>
+    <Color x:Key="ListItemTextColorHover">#35363a</Color>
+    <Color x:Key="ListItemBackgroundColorHover">#e9e9ea</Color>
+    <Color x:Key="ListItemTextColorSelected">#35363a</Color>
+    <Color x:Key="ListItemBackgroundColorSelected">#dee3e6</Color>
+    <Color x:Key="ListItemBorderColor">Transparent</Color>
+    <Color x:Key="ListItemBorderColorHover">Transparent</Color>
+    <Color x:Key="ListItemBorderColorSelected">Transparent</Color>
+    <Thickness x:Key="ListItemMargin">4,1,4,1</Thickness>
+    <Thickness x:Key="ListItemPadding">12,4,8,4</Thickness>
+    <Thickness x:Key="ListItemBorder">0</Thickness>
+    <CornerRadius x:Key="ListItemRadius">4</CornerRadius>
+    <sys:Double x:Key="ListItemFontSize">14</sys:Double>
+
+    <Color x:Key="MenuButtonIconColor">#35363a</Color>
+    <Color x:Key="MenuButtonBackgroundColor">#f5f5f6</Color>
+    <Color x:Key="MenuButtonIconColorHover">#35363a</Color>
+    <Color x:Key="MenuButtonBackgroundColorHover">#e9e9ea</Color>
+    <Color x:Key="MenuButtonIconColorOpen">#35363a</Color>
+    <Color x:Key="MenuButtonBackgroundColorOpen">#dee3e6</Color>
+    <Thickness x:Key="MenuButtonPadding">4</Thickness>
+    <Thickness x:Key="MenuButtonMargin">4,4,0,8</Thickness>
+    <CornerRadius x:Key="MenuButtonRadius">4</CornerRadius>
+    <sys:Double x:Key="MenuButtonHeight">28</sys:Double>
+    <sys:Double x:Key="MenuButtonWidth">28</sys:Double>
+</ResourceDictionary>
