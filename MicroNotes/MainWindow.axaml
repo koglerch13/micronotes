@@ -14,7 +14,7 @@
 		Width="1100"
         x:Name="Root"
 		Height="700"
-        FontFamily="{StaticResource OpenSans}"
+        FontFamily="{StaticResource StandardFont}"
         Icon="/Assets/icon.png"
         Title="µnotes">
     <Design.DataContext>
@@ -25,7 +25,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceInclude Source='/Themes/Solar.axaml'/>
+                <ResourceInclude Source='/Themes/Lion.axaml'/>
             </ResourceDictionary.MergedDictionaries>
             
             <StreamGeometry x:Key="MenuIcon">
@@ -136,14 +136,12 @@
         <Style Selector="ListBox#ListBox ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{DynamicResource ListItemBackgroundColorHover}"/>
             <Setter Property="Foreground" Value="{DynamicResource ListItemTextColorHover}"/>
-            <Setter Property="BorderThickness" Value="{DynamicResource ListItemBorderHover}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource ListItemBorderColorHover}"/>
         </Style>
         
         <Style Selector="ListBox#ListBox ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{DynamicResource ListItemBackgroundColorSelected}"/>
             <Setter Property="Foreground" Value="{DynamicResource ListItemTextColorSelected}"/>
-            <Setter Property="BorderThickness" Value="{DynamicResource ListItemBorderSelected}"/>
             <Setter Property="BorderBrush" Value="{DynamicResource ListItemBorderColorSelected}"/>
         </Style>
         
@@ -206,25 +204,25 @@
         
         <Grid Grid.Column="0" 
               Grid.Row="1"
-              RowDefinitions="*, Auto">
-            <ScrollViewer Grid.Row="0">
+              RowDefinitions="Auto, *, Auto">
+            <ScrollViewer Grid.Row="1">
                 <ListBox x:Name="ListBox" 
                          ItemsSource="{Binding Notes}" 
                          SelectedItem="{Binding SelectedNote}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
-                                <TextBlock FontFamily="{StaticResource OpenSansBold}"
+                                <TextBlock FontFamily="{StaticResource StandardFontBold}"
                                            IsVisible="{Binding HasUnsavedChanges}"
                                            Text="{Binding OriginalTitle}" />
-                                <TextBlock FontFamily="{StaticResource OpenSans}" IsVisible="{Binding !HasUnsavedChanges}" 
+                                <TextBlock FontFamily="{StaticResource StandardFont}" IsVisible="{Binding !HasUnsavedChanges}" 
                                            Text="{Binding OriginalTitle}" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
             </ScrollViewer>
-            <Grid Grid.Row="1" 
+            <Grid Grid.Row="2" 
                   Background="{Binding ElementName=ListBox, Path=Background}">
                 <Menu x:Name="MenuBar" 
                       HorizontalAlignment="Left">
@@ -265,7 +263,7 @@
                 <TextBlock x:Name="PlaceholderText"
                            VerticalAlignment="Center" 
                            HorizontalAlignment="Center" 
-                           FontFamily="{StaticResource OpenSansBold}"
+                           FontFamily="{StaticResource StandardFontBold}"
                            Text="µnotes"/>
             </Grid>
 
@@ -277,7 +275,7 @@
                          Grid.Row="0"
                          Background="Transparent"
                          Text="{Binding SelectedNote.Title, FallbackValue=''}"
-                         FontFamily="{StaticResource OpenSansBold}"
+                         FontFamily="{StaticResource StandardFontBold}"
                          BorderThickness="0"
                          VerticalContentAlignment="Center"/>
                 <avaloniaEdit:TextEditor Grid.Row="1"
@@ -288,7 +286,7 @@
                                          Document="{Binding SelectedNote.Document, FallbackValue={x:Null}}"
                                          VerticalScrollBarVisibility="Auto"
                                          HorizontalScrollBarVisibility="Disabled"
-                                         FontFamily="{StaticResource Inconsolata}" />
+                                         FontFamily="{StaticResource EditorFont}" />
             </Grid>
         </Grid>
     </Grid>

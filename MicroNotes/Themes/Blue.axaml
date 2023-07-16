@@ -35,8 +35,6 @@
     <Thickness x:Key="ListItemMargin">0</Thickness>
     <Thickness x:Key="ListItemPadding">10,12,8,12</Thickness>
     <Thickness x:Key="ListItemBorder">0</Thickness>
-    <Thickness x:Key="ListItemBorderHover">0</Thickness>
-    <Thickness x:Key="ListItemBorderSelected">0</Thickness>
     <CornerRadius x:Key="ListItemRadius">0</CornerRadius>
     <sys:Double x:Key="ListItemFontSize">14</sys:Double>
 
