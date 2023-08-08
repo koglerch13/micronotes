@@ -49,6 +49,9 @@ The goal is to develop µnotes in a way that you never have to use a mouse, unle
 - [ ] Persist last opened folder
 - [ ] Add theming support
 - [ ] Setting for font size
+- [ ] Setting for line wrap
+- [ ] show line wraps
+- [ ] show line numbers
 
 ### Known issues:
 - [ ] macOS crashes when text editor loses focus (fixed by now, update AvaloniaEdit)
