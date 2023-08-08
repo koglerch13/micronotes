@@ -41,15 +41,17 @@ The goal is to develop µnotes in a way that you never have to use a mouse, unle
 - [ ] Save all unsaved notes
 - [ ] "Delete note" context menu
 - [ ] "Search note" feature
+- [ ] Hide title bar (https://github.com/AvaloniaUI/Avalonia/issues/9989)
 
 ### Maybe
-- [ ] Persist last window size
+- [ ] Persist last window size + position
 - [ ] Persist last splitter position
 - [ ] Persist last opened folder
 - [ ] Add theming support
 - [ ] Setting for font size
 
 ### Known issues:
-- [ ] macOS crashes when text editor loses focus
+- [ ] macOS crashes when text editor loses focus (fixed by now, update AvaloniaEdit)
 - [ ] Closing on macOS either reports a crash or hangs.
-- [ ] Message boxes do not get keyboard focus right away
+- [ ] Message boxes do not get keyboard focus right away.
+- [ ] Saving via shortcut moves the caret to the top of the file (at least on windows)
