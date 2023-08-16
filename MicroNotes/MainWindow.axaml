@@ -171,6 +171,7 @@
     </Window.Styles>
     <Window.KeyBindings>
         <KeyBinding Gesture="Ctrl+S" Command="{Binding SaveCommand}"/>
+        <KeyBinding Gesture="Ctrl+Shift+S" Command="{Binding SaveAllCommand}"/>
         <KeyBinding Gesture="Ctrl+N" Command="{Binding NewCommand}"/>
         <KeyBinding Gesture="Ctrl+Shift+D" Command="{Binding DeleteCommand}"/>
         <KeyBinding Gesture="Ctrl+O" Command="{Binding OpenFolderCommand}"/>
@@ -237,6 +238,10 @@
                                   IsEnabled="{Binding SelectedNote.HasUnsavedChanges, FallbackValue=false}"
                                   Command="{Binding SaveCommand}" 
                                   InputGesture="Ctrl+S" />
+                        <MenuItem Header="Save all notes"
+                                  IsVisible="{Binding FolderPath, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                                  Command="{Binding SaveAllCommand}" 
+                                  InputGesture="Ctrl+Shift+S"/>
                         <MenuItem Header="New note" Command="{Binding NewCommand}" 
                                   InputGesture="Ctrl+N"
                                   IsVisible="{Binding FolderPath, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />

@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
-using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using AvaloniaEdit.Document;
@@ -34,6 +33,7 @@ public class MainWindowViewModel : ReactiveObject
         PropertyChanged += OnPropertyChanged;
 
         SaveCommand = ReactiveCommand.CreateFromTask(Save);
+        SaveAllCommand = ReactiveCommand.CreateFromTask(SaveAll);
         NewCommand = ReactiveCommand.Create(New);
         DeleteCommand = ReactiveCommand.CreateFromTask(Delete);
         OpenFolderCommand = ReactiveCommand.CreateFromTask(OpenFolder);
@@ -45,6 +45,7 @@ public class MainWindowViewModel : ReactiveObject
     }
 
     public ReactiveCommand<Unit, Unit> SaveCommand { get; set; }
+    public ReactiveCommand<Unit, Unit> SaveAllCommand { get; set; }
     public ReactiveCommand<Unit, Unit> NewCommand { get; set; }
     public ReactiveCommand<Unit, Unit> DeleteCommand { get; set; }
     public ReactiveCommand<Unit, Unit> OpenFolderCommand { get; set; }
@@ -90,6 +91,11 @@ public class MainWindowViewModel : ReactiveObject
             return;
 
         await Save(SelectedNote);
+    }
+
+    private async Task SaveAll()
+    {
+        
     }
 
     private async Task Save(Note noteToSave)
