@@ -240,6 +240,7 @@
                                   InputGesture="Ctrl+S" />
                         <MenuItem Header="Save all notes"
                                   IsVisible="{Binding FolderPath, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                                  IsEnabled="{Binding NotesCollection.HasUnsavedNotes}"
                                   Command="{Binding SaveAllCommand}" 
                                   InputGesture="Ctrl+Shift+S"/>
                         <MenuItem Header="New note" Command="{Binding NewCommand}" 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -8,7 +7,6 @@ using System.Threading.Tasks;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using AvaloniaEdit.Document;
-using DynamicData.Binding;
 using MicroNotes.MessageBox;
 using ReactiveUI;
 
@@ -68,7 +66,7 @@ public class MainWindowViewModel : ReactiveObject
 
     private async void OnClosing(object? sender, CancelEventArgs e)
     {
-        var hasUnsavedChanges = NotesCollection.Notes.Any(x => x.HasUnsavedChanges);
+        var hasUnsavedChanges = NotesCollection.HasUnsavedNotes;
         if (!hasUnsavedChanges)
             return;
 
@@ -93,7 +91,14 @@ public class MainWindowViewModel : ReactiveObject
 
     private async Task SaveAll()
     {
+        if (!NotesCollection.HasUnsavedNotes)
+            return;
         
+        foreach (var note in NotesCollection.Notes)
+        {
+            if (note.HasUnsavedChanges)
+                await Save(note);
+        }
     }
 
     private async Task Save(Note noteToSave)

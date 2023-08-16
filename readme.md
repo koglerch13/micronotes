@@ -39,7 +39,6 @@ The goal is to develop µnotes in a way that you never have to use a mouse, unle
 - [ ] Publish a release
 - [ ] Styling for text editor search
 - [ ] Styling for search matches
-- [ ] Save all unsaved notes
 - [ ] "Delete note" context menu
 - [ ] "Search note" feature
 - [ ] Hide title bar (https://github.com/AvaloniaUI/Avalonia/issues/9989)
