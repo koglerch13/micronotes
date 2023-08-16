@@ -53,6 +53,7 @@ The goal is to develop µnotes in a way that you never have to use a mouse, unle
 - [ ] Setting for line wrap
 - [ ] show line wraps
 - [ ] show line numbers
+- [ ] Hotkey (F1-F10?) for configurable text building blocks
 
 ### Known issues:
 - [ ] macOS crashes when text editor loses focus (fixed by now, update AvaloniaEdit)
