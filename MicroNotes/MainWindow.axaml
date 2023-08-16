@@ -12,7 +12,7 @@
         x:Name="Root"
 		Height="700"
         FontFamily="{StaticResource StandardFont}"
-        Icon="/Assets/icon.png"
+        Icon="/Assets/icon.png" 
         Title="µnotes">
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,

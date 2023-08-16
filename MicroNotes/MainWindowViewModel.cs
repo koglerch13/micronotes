@@ -23,7 +23,7 @@ public class MainWindowViewModel : ReactiveObject
 
     private ObservableCollectionExtended<Note> _notes = new();
     private Note? _selectedNote;
-    
+
     public MainWindowViewModel(MainWindow mainWindow, IClassicDesktopStyleApplicationLifetime desktop)
     {
         _mainWindow = mainWindow;
@@ -77,7 +77,7 @@ public class MainWindowViewModel : ReactiveObject
                 "You have unsaved changes. These will be lost if you close the application now.\nDo you really want to quit?",
                 ButtonEnum.YesNo, Icon.None, WindowStartupLocation.CenterOwner)
             .ShowWindowDialogAsync(_mainWindow);
-        
+
         if (result == ButtonResult.Yes)
             _desktop.TryShutdown();
     }
@@ -86,7 +86,7 @@ public class MainWindowViewModel : ReactiveObject
     {
         if (string.IsNullOrEmpty(FolderPath))
             return;
-        
+
         if (SelectedNote?.Document == null)
             return;
 
@@ -96,18 +96,20 @@ public class MainWindowViewModel : ReactiveObject
         if (!IsFilenameValid(SelectedNote.Title))
         {
             await MessageBoxManager.GetMessageBoxStandard("Invalid file name.",
-                    "The file name is invalid (maybe it contains invalid characters?)", ButtonEnum.Ok, Icon.None, WindowStartupLocation.CenterOwner)
+                    "The file name is invalid (maybe it contains invalid characters?)", ButtonEnum.Ok, Icon.None,
+                    WindowStartupLocation.CenterOwner)
                 .ShowWindowDialogAsync(_mainWindow);
-            
+
             return;
         }
 
         if (Notes.Any(x => x.OriginalTitle == SelectedNote.Title && x != SelectedNote))
         {
             await MessageBoxManager.GetMessageBoxStandard("File already exists.",
-                    "A file with this title already exists. Please choose another title.", ButtonEnum.Ok, Icon.None, WindowStartupLocation.CenterOwner)
+                    "A file with this title already exists. Please choose another title.", ButtonEnum.Ok, Icon.None,
+                    WindowStartupLocation.CenterOwner)
                 .ShowWindowDialogAsync(_mainWindow);
-            
+
             return;
         }
 
@@ -119,17 +121,18 @@ public class MainWindowViewModel : ReactiveObject
 
         await File.WriteAllTextAsync(SelectedNote.Path, SelectedNote.Document.Text);
 
-        if (SelectedNote.OriginalTitle != SelectedNote.Title)
+        var isRenamed = SelectedNote.OriginalTitle != SelectedNote.Title;
+        if (isRenamed)
         {
             // rename
             var fileInfo = new FileInfo(SelectedNote.Path);
             fileInfo.MoveTo(Path.Join(fileInfo.Directory!.FullName, SelectedNote.Title + ".txt"));
             SelectedNote.OriginalTitle = SelectedNote.Title;
+
+            ReorderNotes();
         }
 
         SelectedNote.HasUnsavedChanges = false;
-        
-        ReorderNotes();
     }
 
     private void ReorderNotes()
@@ -145,12 +148,12 @@ public class MainWindowViewModel : ReactiveObject
         const string invalidCharacters = "#%&{}\\$!'\":@<>*?/,`|=}";
         return invalidCharacters.All(character => !filename.Contains(character));
     }
-
+    
     private void New()
     {
         if (string.IsNullOrEmpty(FolderPath))
             return;
-        
+
         var newNote = new Note { OriginalTitle = "<new>", Document = new TextDocument() };
 
         Notes.Add(newNote);
@@ -165,10 +168,10 @@ public class MainWindowViewModel : ReactiveObject
     {
         if (string.IsNullOrEmpty(FolderPath))
             return;
-        
+
         if (SelectedNote == null)
             return;
-        
+
         var result = await MessageBoxManager.GetMessageBoxStandard("Delete?",
                 $"Do you want to delete the note called '{SelectedNote.OriginalTitle}'?", ButtonEnum.YesNo,
                 Icon.None, WindowStartupLocation.CenterOwner)
@@ -185,8 +188,11 @@ public class MainWindowViewModel : ReactiveObject
 
     private async Task OpenFolder()
     {
-        var defaultFolder = !string.IsNullOrEmpty(FolderPath) ? await _mainWindow.StorageProvider.TryGetFolderFromPathAsync(new Uri(FolderPath)) : null;
-        var result = await _mainWindow.StorageProvider.OpenFolderPickerAsync(new Avalonia.Platform.Storage.FolderPickerOpenOptions { SuggestedStartLocation = defaultFolder, AllowMultiple = false });
+        var defaultFolder = !string.IsNullOrEmpty(FolderPath)
+            ? await _mainWindow.StorageProvider.TryGetFolderFromPathAsync(new Uri(FolderPath))
+            : null;
+        var result = await _mainWindow.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
+            { SuggestedStartLocation = defaultFolder, AllowMultiple = false });
 
         if (result.Count != 1)
             return;

@@ -56,7 +56,4 @@ The goal is to develop µnotes in a way that you never have to use a mouse, unle
 - [ ] Hotkey (F1-F10?) for configurable text building blocks
 
 ### Known issues:
-- [ ] macOS crashes when text editor loses focus (fixed by now, update AvaloniaEdit)
-- [ ] Closing on macOS either reports a crash or hangs.
 - [ ] Message boxes do not get keyboard focus right away.
-- [ ] Saving via shortcut moves the caret to the top of the file (at least on windows)
