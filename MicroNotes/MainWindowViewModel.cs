@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -20,12 +21,13 @@ public class MainWindowViewModel : ReactiveObject
     private readonly MainWindow _mainWindow;
     private string? _folderPath;
 
-    private ObservableCollectionExtended<Note> _notes = new();
     private Note? _selectedNote;
 
     public MainWindowViewModel(MainWindow mainWindow, IClassicDesktopStyleApplicationLifetime desktop,
         IMessageBoxService messageBoxService)
     {
+        NotesCollection = new NotesCollection();
+        
         _messageBoxService = messageBoxService;
         _mainWindow = mainWindow;
         _desktop = desktop;
@@ -62,15 +64,11 @@ public class MainWindowViewModel : ReactiveObject
         set => this.RaiseAndSetIfChanged(ref _selectedNote, value);
     }
 
-    public ObservableCollectionExtended<Note> Notes
-    {
-        get => _notes;
-        set => this.RaiseAndSetIfChanged(ref _notes, value);
-    }
+    public NotesCollection NotesCollection { get; }
 
     private async void OnClosing(object? sender, CancelEventArgs e)
     {
-        var hasUnsavedChanges = Notes.Any(x => x.HasUnsavedChanges);
+        var hasUnsavedChanges = NotesCollection.Notes.Any(x => x.HasUnsavedChanges);
         if (!hasUnsavedChanges)
             return;
 
@@ -112,7 +110,7 @@ public class MainWindowViewModel : ReactiveObject
             return;
         }
 
-        if (Notes.Any(x => x.OriginalTitle == noteToSave.Title && x != noteToSave))
+        if (NotesCollection.Notes.Any(x => x.OriginalTitle == noteToSave.Title && x != noteToSave))
         {
             await _messageBoxService.WarnForExistingFilename();
             return;
@@ -138,11 +136,12 @@ public class MainWindowViewModel : ReactiveObject
         }
 
         noteToSave.HasUnsavedChanges = false;
+        noteToSave.IsNew = false;
     }
 
     private void ReorderNotes()
     {
-        Notes = new ObservableCollectionExtended<Note>(Notes.OrderBy(x => x.OriginalTitle));
+        NotesCollection.Sort();
     }
 
     private bool IsFilenameValid(string filename)
@@ -161,7 +160,7 @@ public class MainWindowViewModel : ReactiveObject
 
         var newNote = new Note { OriginalTitle = "<new>", Document = new TextDocument() };
 
-        Notes.Add(newNote);
+        NotesCollection.Add(newNote);
 
         SelectedNote = newNote;
 
@@ -190,7 +189,7 @@ public class MainWindowViewModel : ReactiveObject
             if (!noteToDelete.IsNew)
                 File.Delete(noteToDelete.Path);
 
-            Notes.Remove(noteToDelete);
+            NotesCollection.Remove(noteToDelete);
             return true;
         }
 
@@ -228,9 +227,10 @@ public class MainWindowViewModel : ReactiveObject
         {
             var title = Path.GetFileNameWithoutExtension(file.Name);
             return new Note(file.FullName, title);
-        }).OrderBy(x => x.Title);
+        }).OrderBy(x => x.Title)
+            .ToList();
 
-        Notes = new ObservableCollectionExtended<Note>(notes);
+        NotesCollection.SetItems(notes);
         SelectedNote = null;
     }
 
