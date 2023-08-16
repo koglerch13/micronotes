@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace MicroNotes;
+namespace MicroNotes.MessageBox;
 
 public interface IMessageBoxService
 {

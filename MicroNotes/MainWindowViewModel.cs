@@ -9,8 +9,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using AvaloniaEdit.Document;
 using DynamicData.Binding;
-using MsBox.Avalonia;
-using MsBox.Avalonia.Enums;
+using MicroNotes.MessageBox;
 using ReactiveUI;
 
 namespace MicroNotes;
@@ -18,14 +17,17 @@ namespace MicroNotes;
 public class MainWindowViewModel : ReactiveObject
 {
     private readonly IClassicDesktopStyleApplicationLifetime _desktop;
+    private readonly IMessageBoxService _messageBoxService;
     private readonly MainWindow _mainWindow;
     private string? _folderPath;
 
     private ObservableCollectionExtended<Note> _notes = new();
     private Note? _selectedNote;
 
-    public MainWindowViewModel(MainWindow mainWindow, IClassicDesktopStyleApplicationLifetime desktop)
+    public MainWindowViewModel(MainWindow mainWindow, IClassicDesktopStyleApplicationLifetime desktop,
+        IMessageBoxService messageBoxService)
     {
+        _messageBoxService = messageBoxService;
         _mainWindow = mainWindow;
         _desktop = desktop;
         _mainWindow.Closing += OnClosing;
@@ -73,12 +75,9 @@ public class MainWindowViewModel : ReactiveObject
 
         e.Cancel = true;
 
-        var result = await MessageBoxManager.GetMessageBoxStandard("Unsaved changes",
-                "You have unsaved changes. These will be lost if you close the application now.\nDo you really want to quit?",
-                ButtonEnum.YesNo, Icon.None, WindowStartupLocation.CenterOwner)
-            .ShowWindowDialogAsync(_mainWindow);
+        var result = await _messageBoxService.ConfirmDiscardUnsavedChanges();
 
-        if (result == ButtonResult.Yes)
+        if (result)
             _desktop.TryShutdown();
     }
 
@@ -95,21 +94,13 @@ public class MainWindowViewModel : ReactiveObject
 
         if (!IsFilenameValid(SelectedNote.Title))
         {
-            await MessageBoxManager.GetMessageBoxStandard("Invalid file name.",
-                    "The file name is invalid (maybe it contains invalid characters?)", ButtonEnum.Ok, Icon.None,
-                    WindowStartupLocation.CenterOwner)
-                .ShowWindowDialogAsync(_mainWindow);
-
+            await _messageBoxService.WarnForInvalidFilename();
             return;
         }
 
         if (Notes.Any(x => x.OriginalTitle == SelectedNote.Title && x != SelectedNote))
         {
-            await MessageBoxManager.GetMessageBoxStandard("File already exists.",
-                    "A file with this title already exists. Please choose another title.", ButtonEnum.Ok, Icon.None,
-                    WindowStartupLocation.CenterOwner)
-                .ShowWindowDialogAsync(_mainWindow);
-
+            await _messageBoxService.WarnForExistingFilename();
             return;
         }
 
@@ -148,7 +139,7 @@ public class MainWindowViewModel : ReactiveObject
         const string invalidCharacters = "#%&{}\\$!'\":@<>*?/,`|=}";
         return invalidCharacters.All(character => !filename.Contains(character));
     }
-    
+
     private void New()
     {
         if (string.IsNullOrEmpty(FolderPath))
@@ -172,12 +163,8 @@ public class MainWindowViewModel : ReactiveObject
         if (SelectedNote == null)
             return;
 
-        var result = await MessageBoxManager.GetMessageBoxStandard("Delete?",
-                $"Do you want to delete the note called '{SelectedNote.OriginalTitle}'?", ButtonEnum.YesNo,
-                Icon.None, WindowStartupLocation.CenterOwner)
-            .ShowWindowDialogAsync(_mainWindow);
-
-        if (result == ButtonResult.Yes)
+        var result = await _messageBoxService.ConfirmDelete(SelectedNote.OriginalTitle);
+        if (result)
         {
             if (!SelectedNote.IsNew) File.Delete(SelectedNote.Path);
 
