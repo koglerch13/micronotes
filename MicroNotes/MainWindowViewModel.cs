@@ -86,44 +86,52 @@ public class MainWindowViewModel : ReactiveObject
         if (string.IsNullOrEmpty(FolderPath))
             return;
 
-        if (SelectedNote?.Document == null)
+        if (SelectedNote == null)
             return;
 
-        if (!SelectedNote.HasUnsavedChanges)
+        await Save(SelectedNote);
+    }
+
+    private async Task Save(Note noteToSave)
+    {
+        if (noteToSave?.Document == null)
             return;
 
-        if (!IsFilenameValid(SelectedNote.Title))
+        if (!noteToSave.HasUnsavedChanges)
+            return;
+
+        if (!IsFilenameValid(noteToSave.Title))
         {
             await _messageBoxService.WarnForInvalidFilename();
             return;
         }
 
-        if (Notes.Any(x => x.OriginalTitle == SelectedNote.Title && x != SelectedNote))
+        if (Notes.Any(x => x.OriginalTitle == noteToSave.Title && x != noteToSave))
         {
             await _messageBoxService.WarnForExistingFilename();
             return;
         }
 
-        if (SelectedNote.IsNew)
+        if (noteToSave.IsNew)
         {
-            SelectedNote.Path = Path.Join(FolderPath, SelectedNote.Title + ".txt");
-            SelectedNote.OriginalTitle = SelectedNote.Title;
+            noteToSave.Path = Path.Join(FolderPath, noteToSave.Title + ".txt");
+            noteToSave.OriginalTitle = noteToSave.Title;
         }
 
-        await File.WriteAllTextAsync(SelectedNote.Path, SelectedNote.Document.Text);
+        await File.WriteAllTextAsync(noteToSave.Path, noteToSave.Document.Text);
 
-        var isRenamed = SelectedNote.OriginalTitle != SelectedNote.Title;
+        var isRenamed = noteToSave.OriginalTitle != noteToSave.Title;
         if (isRenamed)
         {
             // rename
-            var fileInfo = new FileInfo(SelectedNote.Path);
-            fileInfo.MoveTo(Path.Join(fileInfo.Directory!.FullName, SelectedNote.Title + ".txt"));
-            SelectedNote.OriginalTitle = SelectedNote.Title;
+            var fileInfo = new FileInfo(noteToSave.Path);
+            fileInfo.MoveTo(Path.Join(fileInfo.Directory!.FullName, noteToSave.Title + ".txt"));
+            noteToSave.OriginalTitle = noteToSave.Title;
 
             ReorderNotes();
         }
 
-        SelectedNote.HasUnsavedChanges = false;
+        noteToSave.HasUnsavedChanges = false;
     }
 
     private void ReorderNotes()
@@ -163,14 +171,24 @@ public class MainWindowViewModel : ReactiveObject
         if (SelectedNote == null)
             return;
 
-        var result = await _messageBoxService.ConfirmDelete(SelectedNote.OriginalTitle);
+        var isDeleted = await Delete(SelectedNote);
+        if (isDeleted)
+            SelectedNote = null;
+    }
+
+    private async Task<bool> Delete(Note noteToDelete)
+    {
+        var result = await _messageBoxService.ConfirmDelete(noteToDelete.OriginalTitle);
         if (result)
         {
-            if (!SelectedNote.IsNew) File.Delete(SelectedNote.Path);
+            if (!noteToDelete.IsNew)
+                File.Delete(noteToDelete.Path);
 
-            Notes.Remove(SelectedNote);
-            SelectedNote = null;
+            Notes.Remove(noteToDelete);
+            return true;
         }
+
+        return false;
     }
 
     private async Task OpenFolder()
