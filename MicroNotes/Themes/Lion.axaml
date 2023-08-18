@@ -21,7 +21,7 @@
     <Color x:Key="ContentTextSelectionBackgroundColor">#ca7d7f</Color>
     <Color x:Key="ContentTextSelectionColor">#fefffe</Color>
     <Thickness x:Key="TextPadding">28,0,28,0</Thickness>
-    <sys:Double x:Key="TextFontSize">17</sys:Double>
+    <sys:Double x:Key="TextFontSize">15</sys:Double>
 
     <Color x:Key="ListItemTextColor">#d1d2d4</Color>
     <Color x:Key="ListItemBackgroundColor">#2f3137</Color>
@@ -59,6 +59,9 @@
     <CornerRadius x:Key="SearchPanelRadius">4</CornerRadius>
     
     <Color x:Key="SearchPanelTextBoxTextColor">#4b4a4a</Color>
+    <Color x:Key="SearchPanelTextBoxSelectionColor">#fefffe</Color>
+    <Color x:Key="SearchPanelTextBoxSelectionBackgroundColor">#ca7d7f</Color>
+    
     <Color x:Key="SearchPanelTextBoxBackgroundColor">#fefffe</Color>
     <Color x:Key="SearchPanelTextBoxBorderColor">#e1e1e1</Color>
     <Color x:Key="SearchPanelTextBoxPlaceholderColor">#d1d2d4</Color>

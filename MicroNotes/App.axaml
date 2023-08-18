@@ -9,11 +9,9 @@
     </Application.Styles>
 	
 	<Application.Resources>
-		<FontFamily x:Key="EditorFont">/Assets/fonts/Inconsolata-Regular.ttf#Inconsolata</FontFamily>
-		<FontFamily x:Key="EditorFontLight">/Assets/fonts/Inconsolata-Light.ttf#Inconsolata</FontFamily>
-		<FontFamily x:Key="EditorFontBold">/Assets/fonts/Inconsolata-Bold.ttf#Inconsolata</FontFamily>		
+		<FontFamily x:Key="EditorFont">/Assets/fonts/iAWriterQuattroS-Regular.ttf.ttf#iA Writer Quattro S</FontFamily>
+		<FontFamily x:Key="EditorFontBold">/Assets/fonts/iAWriterQuattroS-Bold.ttf.ttf#A Writer Quattro S</FontFamily>		
 		<FontFamily x:Key="StandardFont">/Assets/fonts/OpenSans-Regular.ttf#Open Sans</FontFamily>
-		<FontFamily x:Key="StandardFontLight">/Assets/fonts/OpenSans-Light.ttf#Open Sans</FontFamily>
 		<FontFamily x:Key="StandardFontBold">/Assets/fonts/OpenSans-Bold.ttf#Open Sans</FontFamily>
 	</Application.Resources>
 </Application>

@@ -243,6 +243,8 @@
             <Setter Property="BorderBrush" Value="{DynamicResource SearchPanelTextBoxBorderColor}" />
             <Setter Property="CornerRadius" Value="{DynamicResource SearchPanelTextBoxRadius}" />
             <Setter Property="BorderThickness" Value="{DynamicResource SearchPanelTextBoxBorder}"/>
+            <Setter Property="SelectionBrush" Value="{DynamicResource SearchPanelTextBoxSelectionColor}" />
+            <Setter Property="SelectionForegroundBrush" Value="{DynamicResource SearchPanelTextBoxSelectionBackgroundColor}" />
         </Style>
         
         <Style Selector="search|SearchPanel /template/ TextBox /template/ TextBlock#PART_Watermark">
@@ -285,6 +287,14 @@
         <Style Selector="#TitleBox:pointerover /template/ Border#PART_BorderElement">
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Background" Value="Transparent" />
+        </Style>
+        
+        <Style Selector="search|SearchPanel /template/ TextBox">
+            <Setter Property="FontFamily" Value="{StaticResource StandardFont}"/>
+        </Style>
+        
+        <Style Selector="search|SearchPanel">
+            <Setter Property="FontFamily" Value="{StaticResource StandardFont}"/>
         </Style>
     </Window.Styles>
     <Window.KeyBindings>
