@@ -45,7 +45,7 @@
     <Color x:Key="MenuButtonIconColorOpen">#e1e1e1</Color>
     <Color x:Key="MenuButtonBackgroundColorOpen">#5a5b5a</Color>
     <Thickness x:Key="MenuButtonPadding">4</Thickness>
-    <Thickness x:Key="MenuButtonMargin">4,4,0,8</Thickness>
+    <Thickness x:Key="MenuButtonMargin">4,4,4,8</Thickness>
     <CornerRadius x:Key="MenuButtonRadius">14</CornerRadius>
     <sys:Double x:Key="MenuButtonHeight">28</sys:Double>
     <sys:Double x:Key="MenuButtonWidth">28</sys:Double>
@@ -138,7 +138,7 @@
     <Color x:Key="NoteSearchCancelButtonBackgroundColor">#fefffe</Color>
     <Color x:Key="NoteSearchCancelButtonBorderColor">#fefffe</Color>
     <Thickness x:Key="NoteSearchCancelButtonBorder">0</Thickness>
-    <CornerRadius x:Key="NoteSearchCancelButtonRadius">16</CornerRadius>
+    <CornerRadius x:Key="NoteSearchCancelButtonRadius">0</CornerRadius>
     
     <Color x:Key="NoteSearchCancelButtonTextColorHover">#4b4a4a</Color>
     <Color x:Key="NoteSearchCancelButtonBackgroundColorHover">#fefffe</Color>

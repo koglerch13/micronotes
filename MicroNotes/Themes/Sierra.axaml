@@ -21,7 +21,7 @@
     <Color x:Key="ContentTextSelectionBackgroundColor">#4e91d8</Color>
     <Color x:Key="ContentTextSelectionColor">#fefffe</Color>
     <Thickness x:Key="TextPadding">28,0,28,0</Thickness>
-    <sys:Double x:Key="TextFontSize">16</sys:Double>
+    <sys:Double x:Key="TextFontSize">15</sys:Double>
 
     <Color x:Key="ListItemTextColor">#35363a</Color>
     <Color x:Key="ListItemBackgroundColor">#f5f5f6</Color>
@@ -45,108 +45,107 @@
     <Color x:Key="MenuButtonIconColorOpen">#35363a</Color>
     <Color x:Key="MenuButtonBackgroundColorOpen">#dee3e6</Color>
     <Thickness x:Key="MenuButtonPadding">4</Thickness>
-    <Thickness x:Key="MenuButtonMargin">4,4,0,8</Thickness>
+    <Thickness x:Key="MenuButtonMargin">4,4,4,8</Thickness>
     <CornerRadius x:Key="MenuButtonRadius">4</CornerRadius>
     <sys:Double x:Key="MenuButtonHeight">28</sys:Double>
     <sys:Double x:Key="MenuButtonWidth">28</sys:Double>
     
     
-    <!-- TODO: adapt -->
-    <Color x:Key="SearchResultsBackgroundColor">#ca7d7f</Color>
+    <Color x:Key="SearchResultsBackgroundColor">#4e91d8</Color>
     
-    <Color x:Key="SearchPanelBackgroundColor">#2f3137</Color>
-    <Color x:Key="SearchPanelBorderColor">#2f3137</Color>
-    <Color x:Key="SearchPanelTextColor">#d1d2d4</Color>
-    <Thickness x:Key="SearchPanelBorder">0</Thickness>
+    <Color x:Key="SearchPanelBackgroundColor">#f5f5f6</Color>
+    <Color x:Key="SearchPanelBorderColor">#dfe1e5</Color>
+    <Color x:Key="SearchPanelTextColor">#242429</Color>
+    <Thickness x:Key="SearchPanelBorder">1</Thickness>
     <CornerRadius x:Key="SearchPanelRadius">4</CornerRadius>
     
-    <Color x:Key="SearchPanelTextBoxTextColor">#4b4a4a</Color>
+    <Color x:Key="SearchPanelTextBoxTextColor">#242429</Color>
     <Color x:Key="SearchPanelTextBoxSelectionColor">#fefffe</Color>
-    <Color x:Key="SearchPanelTextBoxSelectionBackgroundColor">#ca7d7f</Color>
+    <Color x:Key="SearchPanelTextBoxSelectionBackgroundColor">#4e91d8</Color>
     
     <Color x:Key="SearchPanelTextBoxBackgroundColor">#fefffe</Color>
-    <Color x:Key="SearchPanelTextBoxBorderColor">#e1e1e1</Color>
-    <Color x:Key="SearchPanelTextBoxPlaceholderColor">#d1d2d4</Color>
+    <Color x:Key="SearchPanelTextBoxBorderColor">#dfe1e5</Color>
+    <Color x:Key="SearchPanelTextBoxPlaceholderColor">#dee3e6</Color>
     <Thickness x:Key="SearchPanelTextBoxBorder">1</Thickness>
     <CornerRadius x:Key="SearchPanelTextBoxRadius">4</CornerRadius>
 
-    <Color x:Key="SearchPanelTextBoxTextColorHover">#4b4a4a</Color>
+    <Color x:Key="SearchPanelTextBoxTextColorHover">#242429</Color>
     <Color x:Key="SearchPanelTextBoxBackgroundColorHover">#fefffe</Color>
-    <Color x:Key="SearchPanelTextBoxBorderColorHover">#e1e1e1</Color>
-    <Color x:Key="SearchPanelTextBoxPlaceholderColorHover">#d1d2d4</Color>
+    <Color x:Key="SearchPanelTextBoxBorderColorHover">#dfe1e5</Color>
+    <Color x:Key="SearchPanelTextBoxPlaceholderColorHover">#dee3e6</Color>
     
-    <Color x:Key="SearchPanelTextBoxTextColorFocus">#4b4a4a</Color>
+    <Color x:Key="SearchPanelTextBoxTextColorFocus">#242429</Color>
     <Color x:Key="SearchPanelTextBoxBackgroundColorFocus">#fefffe</Color>
-    <Color x:Key="SearchPanelTextBoxBorderColorFocus">#e1e1e1</Color>
-    <Color x:Key="SearchPanelTextBoxPlaceholderColorFocus">#d1d2d4</Color>
+    <Color x:Key="SearchPanelTextBoxBorderColorFocus">#dfe1e5</Color>
+    <Color x:Key="SearchPanelTextBoxPlaceholderColorFocus">#dee3e6</Color>
     
-    <Color x:Key="SearchPanelButtonTextColor">#fefffe</Color>
-    <Color x:Key="SearchPanelButtonBackgroundColor">#d54e50</Color>
-    <Color x:Key="SearchPanelButtonBorderColor">#d54e50</Color>
-    <Thickness x:Key="SearchPanelButtonBorder">1</Thickness>
+    <Color x:Key="SearchPanelButtonTextColor">#242429</Color>
+    <Color x:Key="SearchPanelButtonBackgroundColor">#dfe1e5</Color>
+    <Color x:Key="SearchPanelButtonBorderColor">#dfe1e5</Color>
+    <Thickness x:Key="SearchPanelButtonBorder">0</Thickness>
     <CornerRadius x:Key="SearchPanelButtonRadius">4</CornerRadius>
     
-    <Color x:Key="SearchPanelButtonTextColorHover">#fefffe</Color>
-    <Color x:Key="SearchPanelButtonBackgroundColorHover">#ca7d7f</Color>
-    <Color x:Key="SearchPanelButtonBorderColorHover">#ca7d7f</Color>
+    <Color x:Key="SearchPanelButtonTextColorHover">#242429</Color>
+    <Color x:Key="SearchPanelButtonBackgroundColorHover">#e9e9ea</Color>
+    <Color x:Key="SearchPanelButtonBorderColorHover">#e9e9ea</Color>
     
-    <Color x:Key="SearchPanelButtonTextColorPressed">#fefffe</Color>
-    <Color x:Key="SearchPanelButtonBackgroundColorPressed">#ca7d7f</Color>
-    <Color x:Key="SearchPanelButtonBorderColorPressed">#4b4a4a</Color>
+    <Color x:Key="SearchPanelButtonTextColorPressed">#242429</Color>
+    <Color x:Key="SearchPanelButtonBackgroundColorPressed">#dee3e6</Color>
+    <Color x:Key="SearchPanelButtonBorderColorPressed">#dee3e6</Color>
     
-    <Color x:Key="SearchPanelExpanderColor">#fefffe</Color>
-    <Color x:Key="SearchPanelExpanderColorHover">#e1e1e1</Color>
-    <Color x:Key="SearchPanelExpanderColorPressed">#e1e1e1</Color>
+    <Color x:Key="SearchPanelExpanderColor">#dfe1e5</Color>
+    <Color x:Key="SearchPanelExpanderColorHover">#dee3e6</Color>
+    <Color x:Key="SearchPanelExpanderColorPressed">#dee3e6</Color>
     
-    <Color x:Key="SearchPanelToggleButtonTextColor">#4b4a4a</Color>
+    <Color x:Key="SearchPanelToggleButtonTextColor">#242429</Color>
     <Color x:Key="SearchPanelToggleButtonBackgroundColor">#fefffe</Color>
     <Color x:Key="SearchPanelToggleButtonBorderColor">#fefffe</Color>
     <Thickness x:Key="SearchPanelToggleButtonBorder">0</Thickness>
     <CornerRadius x:Key="SearchPanelToggleButtonRadius">4</CornerRadius>
     
-    <Color x:Key="SearchPanelToggleButtonTextColorHover">#4b4a4a</Color>
+    <Color x:Key="SearchPanelToggleButtonTextColorHover">#242429</Color>
     <Color x:Key="SearchPanelToggleButtonBackgroundColorHover">#e1e1e1</Color>
     <Color x:Key="SearchPanelToggleButtonBorderColorHover">#fefffe</Color>
     
-    <Color x:Key="SearchPanelToggleButtonTextColorPressed">#4b4a4a</Color>
+    <Color x:Key="SearchPanelToggleButtonTextColorPressed">#242429</Color>
     <Color x:Key="SearchPanelToggleButtonBackgroundColorPressed">#e1e1e1</Color>
     <Color x:Key="SearchPanelToggleButtonBorderColorPressed">#fefffe</Color>
     
-    <Color x:Key="SearchPanelToggleButtonTextColorActive">#ca7d7f</Color>
+    <Color x:Key="SearchPanelToggleButtonTextColorActive">#4e91d8</Color>
     <Color x:Key="SearchPanelToggleButtonBackgroundColorActive">#fefffe</Color>
     <Color x:Key="SearchPanelToggleButtonBorderColorActive">#fefffe</Color>
     
     
-    <Color x:Key="NoteSearchTextBoxTextColor">#4b4a4a</Color>
+    <Color x:Key="NoteSearchTextBoxTextColor">#242429</Color>
     <Color x:Key="NoteSearchTextBoxBackgroundColor">#fefffe</Color>
-    <Color x:Key="NoteSearchTextBoxBorderColor">#e1e1e1</Color>
-    <Color x:Key="NoteSearchTextBoxPlaceholderColor">#d1d2d4</Color>
-    <Thickness x:Key="NoteSearchTextBoxBorder">0</Thickness>
+    <Color x:Key="NoteSearchTextBoxBorderColor">#dfe1e5</Color>
+    <Color x:Key="NoteSearchTextBoxPlaceholderColor">#dee3e6</Color>
+    <Thickness x:Key="NoteSearchTextBoxBorder">1</Thickness>
     <CornerRadius x:Key="NoteSearchTextBoxRadius">4</CornerRadius>
     <Color x:Key="NoteSearchTextBoxSelectionColor">#fefffe</Color>
-    <Color x:Key="NoteSearchTextBoxSelectionBackgroundColor">#ca7d7f</Color>
+    <Color x:Key="NoteSearchTextBoxSelectionBackgroundColor">#4e91d8</Color>
     
-    <Color x:Key="NoteSearchTextBoxTextColorHover">#4b4a4a</Color>
+    <Color x:Key="NoteSearchTextBoxTextColorHover">#242429</Color>
     <Color x:Key="NoteSearchTextBoxBackgroundColorHover">#fefffe</Color>
-    <Color x:Key="NoteSearchTextBoxBorderColorHover">#e1e1e1</Color>
-    <Color x:Key="NoteSearchTextBoxPlaceholderColorHover">#d1d2d4</Color>
+    <Color x:Key="NoteSearchTextBoxBorderColorHover">#dfe1e5</Color>
+    <Color x:Key="NoteSearchTextBoxPlaceholderColorHover">#dee3e6</Color>
     
-    <Color x:Key="NoteSearchTextBoxTextColorFocus">#4b4a4a</Color>
+    <Color x:Key="NoteSearchTextBoxTextColorFocus">#242429</Color>
     <Color x:Key="NoteSearchTextBoxBackgroundColorFocus">#fefffe</Color>
-    <Color x:Key="NoteSearchTextBoxBorderColorFocus">#e1e1e1</Color>
-    <Color x:Key="NoteSearchTextBoxPlaceholderColorFocus">#d1d2d4</Color>
+    <Color x:Key="NoteSearchTextBoxBorderColorFocus">#dfe1e5</Color>
+    <Color x:Key="NoteSearchTextBoxPlaceholderColorFocus">#dee3e6</Color>
     
-    <Color x:Key="NoteSearchCancelButtonTextColor">#d1d2d4</Color>
+    <Color x:Key="NoteSearchCancelButtonTextColor">#dfe1e5</Color>
     <Color x:Key="NoteSearchCancelButtonBackgroundColor">#fefffe</Color>
     <Color x:Key="NoteSearchCancelButtonBorderColor">#fefffe</Color>
     <Thickness x:Key="NoteSearchCancelButtonBorder">0</Thickness>
-    <CornerRadius x:Key="NoteSearchCancelButtonRadius">16</CornerRadius>
+    <CornerRadius x:Key="NoteSearchCancelButtonRadius">0</CornerRadius>
     
-    <Color x:Key="NoteSearchCancelButtonTextColorHover">#4b4a4a</Color>
+    <Color x:Key="NoteSearchCancelButtonTextColorHover">#242429</Color>
     <Color x:Key="NoteSearchCancelButtonBackgroundColorHover">#fefffe</Color>
     <Color x:Key="NoteSearchCancelButtonBorderColorHover">#fefffe</Color>
     
-    <Color x:Key="NoteSearchCancelButtonTextColorPressed">#4b4a4a</Color>
+    <Color x:Key="NoteSearchCancelButtonTextColorPressed">#242429</Color>
     <Color x:Key="NoteSearchCancelButtonBackgroundColorPressed">#fefffe</Color>
     <Color x:Key="NoteSearchCancelButtonBorderColorPressed">#fefffe</Color>
 </ResourceDictionary>
