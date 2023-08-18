@@ -36,6 +36,8 @@
         <KeyBinding Gesture="Ctrl+Shift+D" Command="{Binding DeleteCommand}" />
         <KeyBinding Gesture="Ctrl+O" Command="{Binding OpenFolderCommand}" />
         <KeyBinding Gesture="Ctrl+Shift+F" Command="{Binding StartNoteSearchCommand}" />
+        <KeyBinding Gesture="Ctrl+E" Command="{Binding FocusEditorCommand}" />
+        <KeyBinding Gesture="Ctrl+T" Command="{Binding FocusTitleCommand}" />
     </Window.KeyBindings>
     <Grid>
         <Grid.RowDefinitions>

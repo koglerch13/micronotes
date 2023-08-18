@@ -46,6 +46,8 @@ public class MainWindowViewModel : ReactiveObject
         CancelNoteSearchCommand = ReactiveCommand.Create(CancelNoteSearch);
         SelectNextNoteCommand = ReactiveCommand.Create(SelectNextNote);
         SelectPreviousNoteCommand = ReactiveCommand.Create(SelectPreviousNote);
+        FocusEditorCommand = ReactiveCommand.Create(FocusEditor);
+        FocusTitleCommand = ReactiveCommand.Create(FocusTitle);
 
         if (_folderPath != null)
             LoadFiles();
@@ -62,6 +64,8 @@ public class MainWindowViewModel : ReactiveObject
     public ReactiveCommand<Unit, Unit> CancelNoteSearchCommand { get; }
     public ReactiveCommand<Unit, Unit> SelectNextNoteCommand { get; }
     public ReactiveCommand<Unit, Unit> SelectPreviousNoteCommand { get; }
+    public ReactiveCommand<Unit, Unit> FocusEditorCommand { get; }
+    public ReactiveCommand<Unit, Unit> FocusTitleCommand { get; }
 
     public string? FolderPath
     {
@@ -147,6 +151,22 @@ public class MainWindowViewModel : ReactiveObject
         }
 
         SelectedNote = NotesCollection.Notes[selectedIndex - 1];
+    }
+
+    private void FocusEditor()
+    {
+        if (SelectedNote != null)
+        {
+            _mainWindow.TextEditor.Focus();
+        }
+    }
+
+    private void FocusTitle()
+    {
+        if (SelectedNote != null)
+        {
+            _mainWindow.TitleBox.Focus();
+        }
     }
 
     private async Task Save()
