@@ -13,7 +13,7 @@
     <Color x:Key="TitleTextColor">#242429</Color>
     <Color x:Key="TitleTextSelectionBackgroundColor">#4e91d8</Color>
     <Color x:Key="TitleTextSelectionColor">#fefffe</Color>
-    <Thickness x:Key="TitlePadding">28,0,0,8</Thickness>
+    <Thickness x:Key="TitlePadding">28,8,0,8</Thickness>
     <sys:Double x:Key="TitleFontSize">24</sys:Double>
     
     <Color x:Key="ContentBackgroundColor">#fefffe</Color>
