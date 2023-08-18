@@ -57,7 +57,6 @@ The goal is to develop µnotes in a way that you never have to use a mouse, unle
 ### Refactoring
 
 - [ ] Move SelectedNote and Selection mechanisms (SelectNext etc...) into NotesCollection
-- [ ] Move Styles Section from MainWindow into separate file
 
 
 
