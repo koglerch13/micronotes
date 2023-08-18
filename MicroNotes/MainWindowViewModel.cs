@@ -6,7 +6,9 @@ using System.Reactive;
 using System.Threading.Tasks;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
+using Avalonia.Threading;
 using AvaloniaEdit.Document;
+using DynamicData;
 using MicroNotes.MessageBox;
 using ReactiveUI;
 
@@ -20,8 +22,11 @@ public class MainWindowViewModel : ReactiveObject
     private string? _folderPath;
 
     private Note? _selectedNote;
+    private bool _isNoteSearchActive;
+    private string? _noteSearchQuery;
 
-    public MainWindowViewModel(MainWindow mainWindow, IClassicDesktopStyleApplicationLifetime desktop,
+    public MainWindowViewModel(MainWindow mainWindow, 
+        IClassicDesktopStyleApplicationLifetime desktop,
         IMessageBoxService messageBoxService)
     {
         NotesCollection = new NotesCollection();
@@ -37,6 +42,10 @@ public class MainWindowViewModel : ReactiveObject
         NewCommand = ReactiveCommand.Create(New);
         DeleteCommand = ReactiveCommand.CreateFromTask(Delete);
         OpenFolderCommand = ReactiveCommand.CreateFromTask(OpenFolder);
+        StartNoteSearchCommand = ReactiveCommand.Create(StartNoteSearch);
+        CancelNoteSearchCommand = ReactiveCommand.Create(CancelNoteSearch);
+        SelectNextNoteCommand = ReactiveCommand.Create(SelectNextNote);
+        SelectPreviousNoteCommand = ReactiveCommand.Create(SelectPreviousNote);
 
         if (_folderPath != null)
             LoadFiles();
@@ -44,11 +53,15 @@ public class MainWindowViewModel : ReactiveObject
             _ = OpenFolder();
     }
 
-    public ReactiveCommand<Unit, Unit> SaveCommand { get; set; }
-    public ReactiveCommand<Unit, Unit> SaveAllCommand { get; set; }
-    public ReactiveCommand<Unit, Unit> NewCommand { get; set; }
-    public ReactiveCommand<Unit, Unit> DeleteCommand { get; set; }
-    public ReactiveCommand<Unit, Unit> OpenFolderCommand { get; set; }
+    public ReactiveCommand<Unit, Unit> SaveCommand { get; }
+    public ReactiveCommand<Unit, Unit> SaveAllCommand { get; }
+    public ReactiveCommand<Unit, Unit> NewCommand { get; }
+    public ReactiveCommand<Unit, Unit> DeleteCommand { get; }
+    public ReactiveCommand<Unit, Unit> OpenFolderCommand { get; }
+    public ReactiveCommand<Unit, Unit> StartNoteSearchCommand { get; }
+    public ReactiveCommand<Unit, Unit> CancelNoteSearchCommand { get; }
+    public ReactiveCommand<Unit, Unit> SelectNextNoteCommand { get; }
+    public ReactiveCommand<Unit, Unit> SelectPreviousNoteCommand { get; }
 
     public string? FolderPath
     {
@@ -60,6 +73,18 @@ public class MainWindowViewModel : ReactiveObject
     {
         get => _selectedNote;
         set => this.RaiseAndSetIfChanged(ref _selectedNote, value);
+    }
+
+    public bool IsNoteSearchActive
+    {
+        get => _isNoteSearchActive;
+        set => this.RaiseAndSetIfChanged(ref _isNoteSearchActive, value);
+    }
+
+    public string? NoteSearchQuery
+    {
+        get => _noteSearchQuery;
+        set => this.RaiseAndSetIfChanged(ref _noteSearchQuery, value);
     }
 
     public NotesCollection NotesCollection { get; }
@@ -76,6 +101,52 @@ public class MainWindowViewModel : ReactiveObject
 
         if (result)
             _desktop.TryShutdown();
+    }
+
+    private void StartNoteSearch()
+    {
+        IsNoteSearchActive = true;
+    }
+
+    private void CancelNoteSearch()
+    {
+        IsNoteSearchActive = false;
+    }
+
+    private void SelectNextNote()
+    {
+        if (SelectedNote == null)
+        {
+            SelectedNote = NotesCollection.Notes.First();
+            return;
+        }
+
+        var selectedIndex = NotesCollection.Notes.IndexOf(SelectedNote);
+        if (selectedIndex == NotesCollection.Notes.Count - 1)
+        {
+            SelectedNote = NotesCollection.Notes.First();
+            return;
+        }
+
+        SelectedNote = NotesCollection.Notes[selectedIndex + 1];
+    }
+
+    private void SelectPreviousNote()
+    {
+        if (SelectedNote == null)
+        {
+            SelectedNote = NotesCollection.Notes.Last();
+            return;
+        }
+        
+        var selectedIndex = NotesCollection.Notes.IndexOf(SelectedNote);
+        if (selectedIndex == 0)
+        {
+            SelectedNote = NotesCollection.Notes.Last();
+            return;
+        }
+
+        SelectedNote = NotesCollection.Notes[selectedIndex - 1];
     }
 
     private async Task Save()
@@ -241,8 +312,18 @@ public class MainWindowViewModel : ReactiveObject
 
     private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(SelectedNote))
-            OnSelectedNoteChanged();
+        switch (e.PropertyName)
+        {
+            case nameof(SelectedNote):
+                OnSelectedNoteChanged();
+                break;
+            case nameof(IsNoteSearchActive):
+                OnIsNoteSearchActiveChanged();
+                break;
+            case nameof(NoteSearchQuery):
+                OnNoteSearchQueryChanged();
+                break;
+        }
     }
 
     private void OnSelectedNoteChanged()
@@ -255,5 +336,29 @@ public class MainWindowViewModel : ReactiveObject
 
         var allText = File.ReadAllText(SelectedNote.Path);
         SelectedNote.Document = new TextDocument(allText);
+    }
+
+    private void OnIsNoteSearchActiveChanged()
+    {
+        if (IsNoteSearchActive)
+        {
+            Dispatcher.UIThread.Post(() => _mainWindow.NotesSearchTextBox.Focus());
+        }
+        else
+        {
+            NoteSearchQuery = null;
+        }
+    }
+
+    private void OnNoteSearchQueryChanged()
+    {
+        if (string.IsNullOrEmpty(NoteSearchQuery))
+        {
+            NotesCollection.Filter(null);
+        }
+        else
+        {
+            NotesCollection.Filter(NoteSearchQuery);
+        }
     }
 }

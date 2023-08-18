@@ -115,4 +115,38 @@
     <Color x:Key="SearchPanelToggleButtonTextColorActive">#ca7d7f</Color>
     <Color x:Key="SearchPanelToggleButtonBackgroundColorActive">#fefffe</Color>
     <Color x:Key="SearchPanelToggleButtonBorderColorActive">#fefffe</Color>
+    
+    
+    <Color x:Key="NoteSearchTextBoxTextColor">#4b4a4a</Color>
+    <Color x:Key="NoteSearchTextBoxBackgroundColor">#fefffe</Color>
+    <Color x:Key="NoteSearchTextBoxBorderColor">#e1e1e1</Color>
+    <Color x:Key="NoteSearchTextBoxPlaceholderColor">#d1d2d4</Color>
+    <Thickness x:Key="NoteSearchTextBoxBorder">0</Thickness>
+    <CornerRadius x:Key="NoteSearchTextBoxRadius">4</CornerRadius>
+    <Color x:Key="NoteSearchTextBoxSelectionColor">#fefffe</Color>
+    <Color x:Key="NoteSearchTextBoxSelectionBackgroundColor">#ca7d7f</Color>
+    
+    <Color x:Key="NoteSearchTextBoxTextColorHover">#4b4a4a</Color>
+    <Color x:Key="NoteSearchTextBoxBackgroundColorHover">#fefffe</Color>
+    <Color x:Key="NoteSearchTextBoxBorderColorHover">#e1e1e1</Color>
+    <Color x:Key="NoteSearchTextBoxPlaceholderColorHover">#d1d2d4</Color>
+    
+    <Color x:Key="NoteSearchTextBoxTextColorFocus">#4b4a4a</Color>
+    <Color x:Key="NoteSearchTextBoxBackgroundColorFocus">#fefffe</Color>
+    <Color x:Key="NoteSearchTextBoxBorderColorFocus">#e1e1e1</Color>
+    <Color x:Key="NoteSearchTextBoxPlaceholderColorFocus">#d1d2d4</Color>
+    
+    <Color x:Key="NoteSearchCancelButtonTextColor">#d1d2d4</Color>
+    <Color x:Key="NoteSearchCancelButtonBackgroundColor">#fefffe</Color>
+    <Color x:Key="NoteSearchCancelButtonBorderColor">#fefffe</Color>
+    <Thickness x:Key="NoteSearchCancelButtonBorder">0</Thickness>
+    <CornerRadius x:Key="NoteSearchCancelButtonRadius">16</CornerRadius>
+    
+    <Color x:Key="NoteSearchCancelButtonTextColorHover">#4b4a4a</Color>
+    <Color x:Key="NoteSearchCancelButtonBackgroundColorHover">#fefffe</Color>
+    <Color x:Key="NoteSearchCancelButtonBorderColorHover">#fefffe</Color>
+    
+    <Color x:Key="NoteSearchCancelButtonTextColorPressed">#4b4a4a</Color>
+    <Color x:Key="NoteSearchCancelButtonBackgroundColorPressed">#fefffe</Color>
+    <Color x:Key="NoteSearchCancelButtonBorderColorPressed">#fefffe</Color>
 </ResourceDictionary>

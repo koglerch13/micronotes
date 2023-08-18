@@ -23,21 +23,23 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceInclude Source='/Themes/Lion.axaml' />
+                <ResourceInclude Source='/Themes/Sierra.axaml' />
             </ResourceDictionary.MergedDictionaries>
 
             <StreamGeometry x:Key="MenuIcon">
                 M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z
             </StreamGeometry>
-            <StreamGeometry x:Key="BurgerIcon">
-                M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z
+            <StreamGeometry x:Key="SearchIcon">
+                M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z
+            </StreamGeometry>
+            <StreamGeometry x:Key="CloseIcon">
+                M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z
             </StreamGeometry>
         </ResourceDictionary>
 
 
     </Window.Resources>
     <Window.Styles>
-
         <!-- Title Box -->
         <Style Selector="TextBox#TitleBox">
             <Setter Property="Margin" Value="{DynamicResource TitlePadding}" />
@@ -71,44 +73,44 @@
 
 
         <!-- MenuButton -->
-        <Style Selector="Menu#MenuBar">
-            <Setter Property="Height" Value="{DynamicResource ActiveTheme.MenuButtonHeight}" />
+        <Style Selector="Menu.MenuBar">
+            <Setter Property="Height" Value="{DynamicResource MenuButtonHeight}" />
             <Setter Property="Width" Value="{DynamicResource MenuButtonWidth}" />
             <Setter Property="Margin" Value="{DynamicResource MenuButtonMargin}" />
         </Style>
-        <Style Selector="MenuItem#MenuButton">
+        <Style Selector="MenuItem.MenuButton">
             <Setter Property="CornerRadius" Value="{DynamicResource MenuButtonRadius}" />
             <Setter Property="Background" Value="{DynamicResource MenuButtonBackgroundColor}" />
         </Style>
 
-        <Style Selector="MenuItem#MenuButton">
-            <Setter Property="Height" Value="{DynamicResource ActiveTheme.MenuButtonHeight}" />
+        <Style Selector="MenuItem.MenuButton">
+            <Setter Property="Height" Value="{DynamicResource MenuButtonHeight}" />
             <Setter Property="Width" Value="{DynamicResource MenuButtonWidth}" />
             <Setter Property="Padding" Value="{DynamicResource MenuButtonPadding}" />
         </Style>
 
-        <Style Selector="MenuItem#MenuButton Path">
+        <Style Selector="MenuItem.MenuButton Path">
             <Setter Property="Fill" Value="{DynamicResource MenuButtonIconColor}" />
         </Style>
 
-        <Style Selector="MenuItem#MenuButton:pointerover:not(:pressed) /template/ Border#PART_LayoutRoot">
+        <Style Selector="MenuItem.MenuButton:pointerover:not(:pressed) /template/ Border#PART_LayoutRoot">
             <Setter Property="Background" Value="{DynamicResource MenuButtonBackgroundColorHover}" />
         </Style>
-        <Style Selector="MenuItem#MenuButton:pointerover:not(:pressed) Path">
+        <Style Selector="MenuItem.MenuButton:pointerover:not(:pressed) Path">
             <Setter Property="Fill" Value="{DynamicResource MenuButtonIconColorHover}" />
         </Style>
 
-        <Style Selector="MenuItem#MenuButton:pressed /template/ Border#PART_LayoutRoot">
+        <Style Selector="MenuItem.MenuButton:pressed /template/ Border#PART_LayoutRoot">
             <Setter Property="Background" Value="{DynamicResource MenuButtonBackgroundColorOpen}" />
         </Style>
-        <Style Selector="MenuItem#MenuButton:pressed Path">
+        <Style Selector="MenuItem.MenuButton:pressed Path">
             <Setter Property="Fill" Value="{DynamicResource MenuButtonIconColorOpen}" />
         </Style>
 
-        <Style Selector="MenuItem#MenuButton:open /template/ Border#PART_LayoutRoot">
+        <Style Selector="MenuItem.MenuButton:open /template/ Border#PART_LayoutRoot">
             <Setter Property="Background" Value="{DynamicResource MenuButtonBackgroundColorOpen}" />
         </Style>
-        <Style Selector="MenuItem#MenuButton:open Path">
+        <Style Selector="MenuItem.MenuButton:open Path">
             <Setter Property="Fill" Value="{DynamicResource MenuButtonIconColorOpen}" />
         </Style>
 
@@ -165,8 +167,8 @@
         <Style Selector="search|SearchPanel">
             <Setter Property="Background" Value="{DynamicResource SearchPanelBackgroundColor}" />
             <Setter Property="BorderBrush" Value="{DynamicResource SearchPanelBorderColor}" />
-            <Setter Property="BorderThickness" Value="{DynamicResource SearchPanelBorder}"/>
-            <Setter Property="CornerRadius" Value="{DynamicResource SearchPanelRadius}"/>
+            <Setter Property="BorderThickness" Value="{DynamicResource SearchPanelBorder}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource SearchPanelRadius}" />
             <Setter Property="Foreground" Value="{DynamicResource SearchPanelTextColor}" />
         </Style>
 
@@ -177,31 +179,33 @@
             <Setter Property="CornerRadius" Value="{DynamicResource SearchPanelButtonRadius}" />
             <Setter Property="Foreground" Value="{DynamicResource SearchPanelButtonTextColor}" />
         </Style>
-        
-        <Style Selector="search|SearchPanel /template/ Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+
+        <Style
+            Selector="search|SearchPanel /template/ Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{DynamicResource SearchPanelButtonBackgroundColorHover}" />
             <Setter Property="BorderBrush" Value="{DynamicResource SearchPanelButtonBorderColorHover}" />
             <Setter Property="Foreground" Value="{DynamicResource SearchPanelButtonTextColorHover}" />
         </Style>
-        
-        <Style Selector="search|SearchPanel /template/ Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
+
+        <Style
+            Selector="search|SearchPanel /template/ Button:pressed /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{DynamicResource SearchPanelButtonBackgroundColorPressed}" />
             <Setter Property="BorderBrush" Value="{DynamicResource SearchPanelButtonBorderColorPressed}" />
             <Setter Property="Foreground" Value="{DynamicResource SearchPanelButtonTextColorPressed}" />
         </Style>
-        
+
         <Style Selector="search|SearchPanel /template/ ToggleButton">
             <Setter Property="Foreground" Value="{DynamicResource SearchPanelExpanderColor}" />
         </Style>
-        
+
         <Style Selector="search|SearchPanel /template/ ToggleButton:pointerover">
             <Setter Property="Foreground" Value="{DynamicResource SearchPanelExpanderColorHover}" />
         </Style>
-        
+
         <Style Selector="search|SearchPanel /template/ ToggleButton:pressed">
             <Setter Property="Foreground" Value="{DynamicResource SearchPanelExpanderColorPressed}" />
         </Style>
-        
+
         <Style Selector="search|SearchPanel /template/ TextBox ToggleButton">
             <Setter Property="Foreground" Value="{DynamicResource SearchPanelToggleButtonTextColor}" />
             <Setter Property="Background" Value="{DynamicResource SearchPanelToggleButtonBackgroundColor}" />
@@ -209,74 +213,149 @@
             <Setter Property="CornerRadius" Value="{DynamicResource SearchPanelToggleButtonRadius}" />
             <Setter Property="BorderThickness" Value="{DynamicResource SearchPanelToggleButtonBorder}" />
         </Style>
-        
+
         <Style Selector="search|SearchPanel /template/ TextBox ToggleButton:checked">
             <Setter Property="Foreground" Value="{DynamicResource SearchPanelToggleButtonTextColorActive}" />
         </Style>
-        
-        <Style Selector="search|SearchPanel /template/ TextBox ToggleButton:checked /template/ ContentPresenter#PART_ContentPresenter">
+
+        <Style
+            Selector="search|SearchPanel /template/ TextBox ToggleButton:checked /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{DynamicResource SearchPanelToggleButtonBackgroundColorActive}" />
             <Setter Property="BorderBrush" Value="{DynamicResource SearchPanelToggleButtonBorderColorActive}" />
         </Style>
-        
+
         <Style Selector="search|SearchPanel /template/ TextBox ToggleButton:pointerover">
             <Setter Property="Foreground" Value="{DynamicResource SearchPanelToggleButtonTextColorHover}" />
         </Style>
-        
-        <Style Selector="search|SearchPanel /template/ TextBox ToggleButton:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+
+        <Style
+            Selector="search|SearchPanel /template/ TextBox ToggleButton:pointerover /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{DynamicResource SearchPanelToggleButtonBackgroundColorHover}" />
             <Setter Property="BorderBrush" Value="{DynamicResource SearchPanelToggleButtonBorderColorHover}" />
         </Style>
-        
+
         <Style Selector="search|SearchPanel /template/ TextBox ToggleButton:pressed">
             <Setter Property="Foreground" Value="{DynamicResource SearchPanelToggleButtonTextColorPressed}" />
         </Style>
-        
-        <Style Selector="search|SearchPanel /template/ TextBox ToggleButton:pressed /template/ ContentPresenter#PART_ContentPresenter">
+
+        <Style
+            Selector="search|SearchPanel /template/ TextBox ToggleButton:pressed /template/ ContentPresenter#PART_ContentPresenter">
             <Setter Property="Background" Value="{DynamicResource SearchPanelToggleButtonBackgroundColorPressed}" />
             <Setter Property="BorderBrush" Value="{DynamicResource SearchPanelToggleButtonBorderColorPressed}" />
         </Style>
-        
+
         <Style Selector="search|SearchPanel /template/ TextBox">
             <Setter Property="Foreground" Value="{DynamicResource SearchPanelTextBoxTextColor}" />
             <Setter Property="Background" Value="{DynamicResource SearchPanelTextBoxBackgroundColor}" />
             <Setter Property="BorderBrush" Value="{DynamicResource SearchPanelTextBoxBorderColor}" />
             <Setter Property="CornerRadius" Value="{DynamicResource SearchPanelTextBoxRadius}" />
-            <Setter Property="BorderThickness" Value="{DynamicResource SearchPanelTextBoxBorder}"/>
-            <Setter Property="SelectionBrush" Value="{DynamicResource SearchPanelTextBoxSelectionColor}" />
-            <Setter Property="SelectionForegroundBrush" Value="{DynamicResource SearchPanelTextBoxSelectionBackgroundColor}" />
+            <Setter Property="BorderThickness" Value="{DynamicResource SearchPanelTextBoxBorder}" />
+            <Setter Property="SelectionBrush" Value="{DynamicResource SearchPanelTextBoxSelectionBackgroundColor}" />
+            <Setter Property="SelectionForegroundBrush" Value="{DynamicResource SearchPanelTextBoxSelectionColor}" />
         </Style>
-        
+
         <Style Selector="search|SearchPanel /template/ TextBox /template/ TextBlock#PART_Watermark">
             <Setter Property="Foreground" Value="{DynamicResource SearchPanelTextBoxPlaceholderColor}" />
         </Style>
-        
+
         <Style Selector="search|SearchPanel /template/ TextBox:pointerover">
-            <Setter Property="Foreground" Value="{DynamicResource SearchPanelTextBoxTextColorHover}"/>
+            <Setter Property="Foreground" Value="{DynamicResource SearchPanelTextBoxTextColorHover}" />
         </Style>
-        
+
         <Style Selector="search|SearchPanel /template/ TextBox:pointerover /template/ TextBlock#PART_Watermark">
             <Setter Property="Foreground" Value="{DynamicResource SearchPanelTextBoxPlaceholderColorHover}" />
         </Style>
-        
+
         <Style Selector="search|SearchPanel /template/ TextBox:pointerover /template/ Border#PART_BorderElement">
             <Setter Property="Background" Value="{DynamicResource SearchPanelTextBoxBackgroundColorHover}" />
             <Setter Property="BorderBrush" Value="{DynamicResource SearchPanelTextBoxBorderColorHover}" />
             <Setter Property="BorderThickness" Value="{DynamicResource SearchPanelTextBoxBorder}" />
         </Style>
-        
+
         <Style Selector="search|SearchPanel /template/ TextBox:focus">
-            <Setter Property="Foreground" Value="{DynamicResource SearchPanelTextBoxTextColorFocus}"/>
+            <Setter Property="Foreground" Value="{DynamicResource SearchPanelTextBoxTextColorFocus}" />
         </Style>
-        
+
         <Style Selector="search|SearchPanel /template/ TextBox:focus /template/ TextBlock#PART_Watermark">
             <Setter Property="Foreground" Value="{DynamicResource SearchPanelTextBoxPlaceholderColorFocus}" />
         </Style>
-        
+
         <Style Selector="search|SearchPanel /template/ TextBox:focus /template/ Border#PART_BorderElement">
             <Setter Property="Background" Value="{DynamicResource SearchPanelTextBoxBackgroundColorFocus}" />
             <Setter Property="BorderBrush" Value="{DynamicResource SearchPanelTextBoxBorderColorFocus}" />
             <Setter Property="BorderThickness" Value="{DynamicResource SearchPanelTextBoxBorder}" />
+        </Style>
+        
+        <!-- Notes search -->
+        <Style Selector="TextBox#NotesSearchTextBox">
+            <Setter Property="Foreground" Value="{DynamicResource NoteSearchTextBoxTextColor}" />
+            <Setter Property="Background" Value="{DynamicResource NoteSearchTextBoxBackgroundColor}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource NoteSearchTextBoxBorderColor}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource NoteSearchTextBoxRadius}" />
+            <Setter Property="BorderThickness" Value="{DynamicResource NoteSearchTextBoxBorder}" />
+            <Setter Property="SelectionBrush" Value="{DynamicResource NoteSearchTextBoxSelectionBackgroundColor}" />
+            <Setter Property="SelectionForegroundBrush" Value="{DynamicResource NoteSearchTextBoxSelectionColor}" />
+        </Style>
+        
+        <Style Selector="TextBox#NotesSearchTextBox /template/ TextBlock#PART_Watermark">
+            <Setter Property="Foreground" Value="{DynamicResource NoteSearchTextBoxPlaceholderColor}" />
+        </Style>
+
+        <Style Selector="TextBox#NotesSearchTextBox:pointerover">
+            <Setter Property="Foreground" Value="{DynamicResource NoteSearchTextBoxTextColorHover}" />
+        </Style>
+
+        <Style Selector="TextBox#NotesSearchTextBox:pointerover /template/ TextBlock#PART_Watermark">
+            <Setter Property="Foreground" Value="{DynamicResource NoteSearchTextBoxPlaceholderColorHover}" />
+        </Style>
+
+        <Style Selector="TextBox#NotesSearchTextBox:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="{DynamicResource NoteSearchTextBoxBackgroundColorHover}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource NoteSearchTextBoxBorderColorHover}" />
+            <Setter Property="BorderThickness" Value="{DynamicResource NoteSearchTextBoxBorder}" />
+        </Style>
+
+        <Style Selector="TextBox#NotesSearchTextBox:focus">
+            <Setter Property="Foreground" Value="{DynamicResource NoteSearchTextBoxTextColorFocus}" />
+        </Style>
+
+        <Style Selector="TextBox#NotesSearchTextBox:focus /template/ TextBlock#PART_Watermark">
+            <Setter Property="Foreground" Value="{DynamicResource NoteSearchTextBoxPlaceholderColorFocus}" />
+        </Style>
+
+        <Style Selector="TextBox#NotesSearchTextBox:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="{DynamicResource NoteSearchTextBoxBackgroundColorFocus}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource NoteSearchTextBoxBorderColorFocus}" />
+            <Setter Property="BorderThickness" Value="{DynamicResource NoteSearchTextBoxBorder}" />
+        </Style>
+        
+        <Style Selector="Button#NotesSearchCancelButton">
+            <Setter Property="Background" Value="{DynamicResource NoteSearchCancelButtonBackgroundColor}" />
+            <Setter Property="BorderThickness" Value="{DynamicResource NoteSearchCancelButtonBorder}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource NoteSearchCancelButtonBorderColor}" />
+            <Setter Property="CornerRadius" Value="{DynamicResource NoteSearchCancelButtonRadius}" />
+        </Style>
+        
+        <Style Selector="Button#NotesSearchCancelButton Path">
+            <Setter Property="Fill" Value="{DynamicResource NoteSearchCancelButtonTextColor}" />
+        </Style>
+
+        <Style Selector="Button#NotesSearchCancelButton:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource NoteSearchCancelButtonBackgroundColorHover}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource NoteSearchCancelButtonBorderColorHover}" />
+        </Style>
+        
+        <Style Selector="Button#NotesSearchCancelButton:pointerover Path">
+            <Setter Property="Fill" Value="{DynamicResource NoteSearchCancelButtonTextColorHover}" />
+        </Style>
+
+        <Style Selector="Button#NotesSearchCancelButton:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource NoteSearchCancelButtonBackgroundColorPressed}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource NoteSearchCancelButtonBorderColorPressed}" />
+        </Style>
+        
+        <Style Selector="Button#NotesSearchCancelButton:pressed Path">
+            <Setter Property="Fill" Value="{DynamicResource NoteSearchCancelButtonTextColorPressed}" />
         </Style>
 
         <!-- Extra stuff (not themeable) -->
@@ -288,13 +367,29 @@
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Background" Value="Transparent" />
         </Style>
-        
+
         <Style Selector="search|SearchPanel /template/ TextBox">
-            <Setter Property="FontFamily" Value="{StaticResource StandardFont}"/>
+            <Setter Property="FontFamily" Value="{StaticResource StandardFont}" />
+        </Style>
+
+        <Style Selector="search|SearchPanel">
+            <Setter Property="FontFamily" Value="{StaticResource StandardFont}" />
         </Style>
         
-        <Style Selector="search|SearchPanel">
-            <Setter Property="FontFamily" Value="{StaticResource StandardFont}"/>
+        <Style Selector="TextBox#NotesSearchTextBox">
+            <Setter Property="FontFamily" Value="{StaticResource StandardFont}" />
+            <Setter Property="Height" Value="{DynamicResource MenuButtonHeight}"/>
+        </Style>
+        
+        <Style Selector="Button#NotesSearchCancelButton">
+            <Setter Property="MaxHeight" Value="{DynamicResource MenuButtonHeight}"/>
+            <Setter Property="MaxWidth" Value="{DynamicResource MenuButtonHeight}"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>
+        
+        <Style Selector="Button#NotesSearchCancelButton Viewbox">
+            <Setter Property="Margin" Value="4"/>
         </Style>
     </Window.Styles>
     <Window.KeyBindings>
@@ -303,6 +398,7 @@
         <KeyBinding Gesture="Ctrl+N" Command="{Binding NewCommand}" />
         <KeyBinding Gesture="Ctrl+Shift+D" Command="{Binding DeleteCommand}" />
         <KeyBinding Gesture="Ctrl+O" Command="{Binding OpenFolderCommand}" />
+        <KeyBinding Gesture="Ctrl+Shift+F" Command="{Binding StartNoteSearchCommand}" />
     </Window.KeyBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -350,12 +446,13 @@
                 </ListBox>
             </ScrollViewer>
             <Grid Grid.Row="2"
+                  ColumnDefinitions="Auto,*,Auto"
                   Background="{Binding ElementName=ListBox, Path=Background}">
-                <Menu x:Name="MenuBar"
-                      HorizontalAlignment="Left">
-                    <MenuItem x:Name="MenuButton">
+                <Menu Grid.Column="0"
+                      Classes="MenuBar">
+                    <MenuItem Classes="MenuButton">
                         <MenuItem.Header>
-                            <Border x:Name="MenuButtonBorder">
+                            <Border>
                                 <Viewbox>
                                     <Path Height="24" Width="24"
                                           Data="{StaticResource MenuIcon}" />
@@ -380,6 +477,50 @@
                                   IsVisible="{Binding FolderPath, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
                         <MenuItem Header="Open folder" Command="{Binding OpenFolderCommand}"
                                   InputGesture="Ctrl+O" />
+                    </MenuItem>
+                </Menu>
+
+                <Grid Grid.Column="1" 
+                      IsVisible="{Binding IsNoteSearchActive}">
+                    <TextBox x:Name="NotesSearchTextBox" 
+                             Watermark="Find notes..."
+                             VerticalAlignment="Center" 
+                             HorizontalAlignment="Stretch"
+                             Text="{Binding NoteSearchQuery}">
+                        <TextBox.KeyBindings>
+                            <KeyBinding Gesture="Escape" Command="{Binding CancelNoteSearchCommand}" />
+                            <KeyBinding Gesture="Up" Command="{Binding SelectPreviousNoteCommand}" />
+                            <KeyBinding Gesture="Down" Command="{Binding SelectNextNoteCommand}" />
+                        </TextBox.KeyBindings>
+                    </TextBox>
+                    <Button x:Name="NotesSearchCancelButton" 
+                            Command="{Binding CancelNoteSearchCommand}"
+                            VerticalAlignment="Center" 
+                            HorizontalAlignment="Right">
+                        <Border>
+                            <Viewbox>
+                                <Path Height="24" Width="24" Data="{StaticResource CloseIcon}" />
+                            </Viewbox>
+                        </Border>
+                    </Button>
+                </Grid>
+                
+                <Menu Grid.Column="2" Classes="MenuBar" 
+                      IsVisible="{Binding !IsNoteSearchActive}">
+                    <MenuItem Classes="MenuButton"
+                              InputGesture="Ctrl+Shift+F"
+                              Command="{Binding StartNoteSearchCommand}">
+                        <ToolTip.Tip>
+                            Find notes (Ctrl+Shift+F)
+                        </ToolTip.Tip>
+                        <MenuItem.Header>
+                            <Border>
+                                <Viewbox>
+                                    <Path Height="24" Width="24"
+                                          Data="{StaticResource SearchIcon}" />
+                                </Viewbox>
+                            </Border>
+                        </MenuItem.Header>
                     </MenuItem>
                 </Menu>
             </Grid>

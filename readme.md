@@ -37,8 +37,7 @@ The goal is to develop µnotes in a way that you never have to use a mouse, unle
 ## To Do
 - [ ] Better icon
 - [ ] Publish a release
-- [ ] "Search note" feature
-- [ ] Style search panel for all other themes
+- [ ] Style search panel for other themes
 - [ ] Hide title bar (https://github.com/AvaloniaUI/Avalonia/issues/9989)
 
 ### Maybe
@@ -53,5 +52,12 @@ The goal is to develop µnotes in a way that you never have to use a mouse, unle
 - [ ] show line numbers
 - [ ] Hotkey (F1-F10?) for configurable text building blocks
 
-### Known issues:
+### Known issues
 - [ ] Message boxes do not get keyboard focus right away.
+
+### Refactoring
+
+- [ ] Move SelectedNote and Selection mechanisms (SelectNext etc...) into NotesCollection
+
+
+
