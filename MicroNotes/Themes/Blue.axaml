@@ -49,4 +49,66 @@
     <CornerRadius x:Key="MenuButtonRadius">14</CornerRadius>
     <sys:Double x:Key="MenuButtonHeight">28</sys:Double>
     <sys:Double x:Key="MenuButtonWidth">28</sys:Double>
+    
+    <!-- TODO: adapt -->
+    <Color x:Key="SearchResultsBackgroundColor">#ca7d7f</Color>
+    
+    <Color x:Key="SearchPanelBackgroundColor">#2f3137</Color>
+    <Color x:Key="SearchPanelBorderColor">#2f3137</Color>
+    <Color x:Key="SearchPanelTextColor">#d1d2d4</Color>
+    <Thickness x:Key="SearchPanelBorder">0</Thickness>
+    <CornerRadius x:Key="SearchPanelRadius">4</CornerRadius>
+    
+    <Color x:Key="SearchPanelTextBoxTextColor">#4b4a4a</Color>
+    <Color x:Key="SearchPanelTextBoxBackgroundColor">#fefffe</Color>
+    <Color x:Key="SearchPanelTextBoxBorderColor">#e1e1e1</Color>
+    <Color x:Key="SearchPanelTextBoxPlaceholderColor">#d1d2d4</Color>
+    <Thickness x:Key="SearchPanelTextBoxBorder">1</Thickness>
+    <CornerRadius x:Key="SearchPanelTextBoxRadius">4</CornerRadius>
+
+    <Color x:Key="SearchPanelTextBoxTextColorHover">#4b4a4a</Color>
+    <Color x:Key="SearchPanelTextBoxBackgroundColorHover">#fefffe</Color>
+    <Color x:Key="SearchPanelTextBoxBorderColorHover">#e1e1e1</Color>
+    <Color x:Key="SearchPanelTextBoxPlaceholderColorHover">#d1d2d4</Color>
+    
+    <Color x:Key="SearchPanelTextBoxTextColorFocus">#4b4a4a</Color>
+    <Color x:Key="SearchPanelTextBoxBackgroundColorFocus">#fefffe</Color>
+    <Color x:Key="SearchPanelTextBoxBorderColorFocus">#e1e1e1</Color>
+    <Color x:Key="SearchPanelTextBoxPlaceholderColorFocus">#d1d2d4</Color>
+    
+    <Color x:Key="SearchPanelButtonTextColor">#fefffe</Color>
+    <Color x:Key="SearchPanelButtonBackgroundColor">#d54e50</Color>
+    <Color x:Key="SearchPanelButtonBorderColor">#d54e50</Color>
+    <Thickness x:Key="SearchPanelButtonBorder">1</Thickness>
+    <CornerRadius x:Key="SearchPanelButtonRadius">4</CornerRadius>
+    
+    <Color x:Key="SearchPanelButtonTextColorHover">#fefffe</Color>
+    <Color x:Key="SearchPanelButtonBackgroundColorHover">#ca7d7f</Color>
+    <Color x:Key="SearchPanelButtonBorderColorHover">#ca7d7f</Color>
+    
+    <Color x:Key="SearchPanelButtonTextColorPressed">#fefffe</Color>
+    <Color x:Key="SearchPanelButtonBackgroundColorPressed">#ca7d7f</Color>
+    <Color x:Key="SearchPanelButtonBorderColorPressed">#4b4a4a</Color>
+    
+    <Color x:Key="SearchPanelExpanderColor">#fefffe</Color>
+    <Color x:Key="SearchPanelExpanderColorHover">#e1e1e1</Color>
+    <Color x:Key="SearchPanelExpanderColorPressed">#e1e1e1</Color>
+    
+    <Color x:Key="SearchPanelToggleButtonTextColor">#4b4a4a</Color>
+    <Color x:Key="SearchPanelToggleButtonBackgroundColor">#fefffe</Color>
+    <Color x:Key="SearchPanelToggleButtonBorderColor">#fefffe</Color>
+    <Thickness x:Key="SearchPanelToggleButtonBorder">0</Thickness>
+    <CornerRadius x:Key="SearchPanelToggleButtonRadius">4</CornerRadius>
+    
+    <Color x:Key="SearchPanelToggleButtonTextColorHover">#4b4a4a</Color>
+    <Color x:Key="SearchPanelToggleButtonBackgroundColorHover">#e1e1e1</Color>
+    <Color x:Key="SearchPanelToggleButtonBorderColorHover">#fefffe</Color>
+    
+    <Color x:Key="SearchPanelToggleButtonTextColorPressed">#4b4a4a</Color>
+    <Color x:Key="SearchPanelToggleButtonBackgroundColorPressed">#e1e1e1</Color>
+    <Color x:Key="SearchPanelToggleButtonBorderColorPressed">#fefffe</Color>
+    
+    <Color x:Key="SearchPanelToggleButtonTextColorActive">#ca7d7f</Color>
+    <Color x:Key="SearchPanelToggleButtonBackgroundColorActive">#fefffe</Color>
+    <Color x:Key="SearchPanelToggleButtonBorderColorActive">#fefffe</Color>
 </ResourceDictionary>

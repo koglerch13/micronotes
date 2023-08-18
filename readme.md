@@ -37,10 +37,8 @@ The goal is to develop µnotes in a way that you never have to use a mouse, unle
 ## To Do
 - [ ] Better icon
 - [ ] Publish a release
-- [ ] Styling for text editor search
-- [ ] Styling for search matches
-- [ ] "Delete note" context menu
 - [ ] "Search note" feature
+- [ ] Style search panel for all other themes
 - [ ] Hide title bar (https://github.com/AvaloniaUI/Avalonia/issues/9989)
 
 ### Maybe
@@ -48,6 +46,7 @@ The goal is to develop µnotes in a way that you never have to use a mouse, unle
 - [ ] Persist last splitter position
 - [ ] Persist last opened folder
 - [ ] Add theming support
+- [ ] "Delete note" context menu
 - [ ] Setting for font size
 - [ ] Setting for line wrap
 - [ ] show line wraps
