@@ -110,11 +110,14 @@ public class MainWindowViewModel : ReactiveObject
     private void StartNoteSearch()
     {
         IsNoteSearchActive = true;
+        Dispatcher.UIThread.Post(() => _mainWindow.NotesSearchTextBox.Focus());
+
     }
 
     private void CancelNoteSearch()
     {
         IsNoteSearchActive = false;
+        NoteSearchQuery = null;
     }
 
     private void SelectNextNote()
@@ -337,9 +340,6 @@ public class MainWindowViewModel : ReactiveObject
             case nameof(SelectedNote):
                 OnSelectedNoteChanged();
                 break;
-            case nameof(IsNoteSearchActive):
-                OnIsNoteSearchActiveChanged();
-                break;
             case nameof(NoteSearchQuery):
                 OnNoteSearchQueryChanged();
                 break;
@@ -356,18 +356,6 @@ public class MainWindowViewModel : ReactiveObject
 
         var allText = File.ReadAllText(SelectedNote.Path);
         SelectedNote.Document = new TextDocument(allText);
-    }
-
-    private void OnIsNoteSearchActiveChanged()
-    {
-        if (IsNoteSearchActive)
-        {
-            Dispatcher.UIThread.Post(() => _mainWindow.NotesSearchTextBox.Focus());
-        }
-        else
-        {
-            NoteSearchQuery = null;
-        }
     }
 
     private void OnNoteSearchQueryChanged()
