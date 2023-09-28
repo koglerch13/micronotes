@@ -35,7 +35,6 @@ The goal is to develop µnotes in a way that you never have to use a mouse, unle
 
 
 ## To Do
-- [ ] Better icon
 - [ ] Publish a release
 - [ ] Hide title bar (https://github.com/AvaloniaUI/Avalonia/issues/9989)
 
@@ -56,7 +55,6 @@ The goal is to develop µnotes in a way that you never have to use a mouse, unle
 
 ### Refactoring
 
-- [ ] Move SelectedNote and Selection mechanisms (SelectNext etc...) into NotesCollection
 
 
 
