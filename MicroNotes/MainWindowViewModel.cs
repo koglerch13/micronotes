@@ -8,7 +8,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using AvaloniaEdit.Document;
-using DynamicData;
 using MicroNotes.MessageBox;
 using ReactiveUI;
 
@@ -21,21 +20,21 @@ public class MainWindowViewModel : ReactiveObject
     private readonly MainWindow _mainWindow;
     private string? _folderPath;
 
-    private Note? _selectedNote;
     private bool _isNoteSearchActive;
     private string? _noteSearchQuery;
 
-    public MainWindowViewModel(MainWindow mainWindow, 
+    public MainWindowViewModel(MainWindow mainWindow,
         IClassicDesktopStyleApplicationLifetime desktop,
         IMessageBoxService messageBoxService)
     {
         NotesCollection = new NotesCollection();
-        
+
         _messageBoxService = messageBoxService;
         _mainWindow = mainWindow;
         _desktop = desktop;
         _mainWindow.Closing += OnClosing;
         PropertyChanged += OnPropertyChanged;
+        NotesCollection.PropertyChanged += OnNotesCollectionPropertyChanged;
 
         SaveCommand = ReactiveCommand.CreateFromTask(Save);
         SaveAllCommand = ReactiveCommand.CreateFromTask(SaveAll);
@@ -44,8 +43,8 @@ public class MainWindowViewModel : ReactiveObject
         OpenFolderCommand = ReactiveCommand.CreateFromTask(OpenFolder);
         StartNoteSearchCommand = ReactiveCommand.Create(StartNoteSearch);
         CancelNoteSearchCommand = ReactiveCommand.Create(CancelNoteSearch);
-        SelectNextNoteCommand = ReactiveCommand.Create(SelectNextNote);
-        SelectPreviousNoteCommand = ReactiveCommand.Create(SelectPreviousNote);
+        SelectNextNoteCommand = ReactiveCommand.Create(NotesCollection.SelectNextNote);
+        SelectPreviousNoteCommand = ReactiveCommand.Create(NotesCollection.SelectPreviousNote);
         FocusEditorCommand = ReactiveCommand.Create(FocusEditor);
         FocusTitleCommand = ReactiveCommand.Create(FocusTitle);
 
@@ -53,6 +52,12 @@ public class MainWindowViewModel : ReactiveObject
             LoadFiles();
         else
             _ = OpenFolder();
+    }
+
+    private void OnNotesCollectionPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(NotesCollection.SelectedNote))
+            OnSelectedNoteChanged();
     }
 
     public ReactiveCommand<Unit, Unit> SaveCommand { get; }
@@ -71,12 +76,6 @@ public class MainWindowViewModel : ReactiveObject
     {
         get => _folderPath;
         set => this.RaiseAndSetIfChanged(ref _folderPath, value);
-    }
-
-    public Note? SelectedNote
-    {
-        get => _selectedNote;
-        set => this.RaiseAndSetIfChanged(ref _selectedNote, value);
     }
 
     public bool IsNoteSearchActive
@@ -111,7 +110,6 @@ public class MainWindowViewModel : ReactiveObject
     {
         IsNoteSearchActive = true;
         Dispatcher.UIThread.Post(() => _mainWindow.NotesSearchTextBox.Focus());
-
     }
 
     private void CancelNoteSearch()
@@ -120,45 +118,9 @@ public class MainWindowViewModel : ReactiveObject
         NoteSearchQuery = null;
     }
 
-    private void SelectNextNote()
-    {
-        if (SelectedNote == null)
-        {
-            SelectedNote = NotesCollection.Notes.First();
-            return;
-        }
-
-        var selectedIndex = NotesCollection.Notes.IndexOf(SelectedNote);
-        if (selectedIndex == NotesCollection.Notes.Count - 1)
-        {
-            SelectedNote = NotesCollection.Notes.First();
-            return;
-        }
-
-        SelectedNote = NotesCollection.Notes[selectedIndex + 1];
-    }
-
-    private void SelectPreviousNote()
-    {
-        if (SelectedNote == null)
-        {
-            SelectedNote = NotesCollection.Notes.Last();
-            return;
-        }
-        
-        var selectedIndex = NotesCollection.Notes.IndexOf(SelectedNote);
-        if (selectedIndex == 0)
-        {
-            SelectedNote = NotesCollection.Notes.Last();
-            return;
-        }
-
-        SelectedNote = NotesCollection.Notes[selectedIndex - 1];
-    }
-
     private void FocusEditor()
     {
-        if (SelectedNote != null)
+        if (NotesCollection.SelectedNote != null)
         {
             _mainWindow.TextEditor.Focus();
         }
@@ -166,7 +128,7 @@ public class MainWindowViewModel : ReactiveObject
 
     private void FocusTitle()
     {
-        if (SelectedNote != null)
+        if (NotesCollection.SelectedNote != null)
         {
             _mainWindow.TitleBox.Focus();
         }
@@ -177,17 +139,17 @@ public class MainWindowViewModel : ReactiveObject
         if (string.IsNullOrEmpty(FolderPath))
             return;
 
-        if (SelectedNote == null)
+        if (NotesCollection.SelectedNote == null)
             return;
 
-        await Save(SelectedNote);
+        await Save(NotesCollection.SelectedNote);
     }
 
     private async Task SaveAll()
     {
         if (!NotesCollection.HasUnsavedNotes)
             return;
-        
+
         foreach (var note in NotesCollection.Notes)
         {
             if (note.HasUnsavedChanges)
@@ -261,7 +223,7 @@ public class MainWindowViewModel : ReactiveObject
 
         NotesCollection.Add(newNote);
 
-        SelectedNote = newNote;
+        NotesCollection.SelectedNote = newNote;
 
         _mainWindow.TitleBox.SelectAll();
         _mainWindow.TitleBox.Focus();
@@ -272,12 +234,12 @@ public class MainWindowViewModel : ReactiveObject
         if (string.IsNullOrEmpty(FolderPath))
             return;
 
-        if (SelectedNote == null)
+        if (NotesCollection.SelectedNote == null)
             return;
 
-        var isDeleted = await Delete(SelectedNote);
+        var isDeleted = await Delete(NotesCollection.SelectedNote);
         if (isDeleted)
-            SelectedNote = null;
+            NotesCollection.SelectedNote = null;
     }
 
     private async Task<bool> Delete(Note noteToDelete)
@@ -301,7 +263,7 @@ public class MainWindowViewModel : ReactiveObject
             ? await _mainWindow.StorageProvider.TryGetFolderFromPathAsync(new Uri(FolderPath))
             : null;
         var result = await _mainWindow.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
-            { SuggestedStartLocation = defaultFolder, AllowMultiple = false });
+        { SuggestedStartLocation = defaultFolder, AllowMultiple = false });
 
         if (result.Count != 1)
             return;
@@ -330,16 +292,13 @@ public class MainWindowViewModel : ReactiveObject
             .ToList();
 
         NotesCollection.SetItems(notes);
-        SelectedNote = null;
+        NotesCollection.SelectedNote = null;
     }
 
     private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         switch (e.PropertyName)
         {
-            case nameof(SelectedNote):
-                OnSelectedNoteChanged();
-                break;
             case nameof(NoteSearchQuery):
                 OnNoteSearchQueryChanged();
                 break;
@@ -348,14 +307,14 @@ public class MainWindowViewModel : ReactiveObject
 
     private void OnSelectedNoteChanged()
     {
-        if (SelectedNote == null)
+        if (NotesCollection.SelectedNote == null)
             return;
 
-        if (SelectedNote.Document != null)
+        if (NotesCollection.SelectedNote.Document != null)
             return;
 
-        var allText = File.ReadAllText(SelectedNote.Path);
-        SelectedNote.Document = new TextDocument(allText);
+        var allText = File.ReadAllText(NotesCollection.SelectedNote.Path);
+        NotesCollection.SelectedNote.Document = new TextDocument(allText);
     }
 
     private void OnNoteSearchQueryChanged()

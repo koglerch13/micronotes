@@ -51,7 +51,7 @@
         </Grid.ColumnDefinitions>
 
         <Border Grid.Row="0"
-                Grid.Column="0"
+    Grid.Column="0"
                 Background="{Binding Background, ElementName=ListBox }"
                 IsHitTestVisible="False" />
         <Border Grid.Row="0"
@@ -59,8 +59,8 @@
                 Grid.Column="1"
                 IsHitTestVisible="False" />
         <Border Grid.Row="0"
-                Background="{Binding Background, ElementName=ContentSection}"
-                Grid.Column="2"
+    Background="{Binding Background, ElementName=ContentSection}"
+     Grid.Column="2"
                 IsHitTestVisible="False" />
 
         <Grid Grid.Column="0"
@@ -69,7 +69,7 @@
             <ScrollViewer Grid.Row="1">
                 <ListBox x:Name="ListBox"
                          ItemsSource="{Binding NotesCollection.Notes}"
-                         SelectedItem="{Binding SelectedNote}">
+                         SelectedItem="{Binding NotesCollection.SelectedNote}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -100,7 +100,7 @@
                         </MenuItem.Header>
                         <MenuItem Header="Save note"
                                   IsVisible="{Binding FolderPath, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
-                                  IsEnabled="{Binding SelectedNote.HasUnsavedChanges, FallbackValue=false}"
+                                  IsEnabled="{Binding NotesCollection.SelectedNote.HasUnsavedChanges, FallbackValue=false}"
                                   Command="{Binding SaveCommand}"
                                   InputGesture="Ctrl+S" />
                         <MenuItem Header="Save all notes"
@@ -172,7 +172,7 @@
         <Grid Grid.Column="2"
               Grid.Row="1"
               x:Name="ContentSection">
-            <Grid IsVisible="{Binding SelectedNote, Converter={x:Static ObjectConverters.IsNull}}">
+            <Grid IsVisible="{Binding NotesCollection.SelectedNote, Converter={x:Static ObjectConverters.IsNull}}">
                 <TextBlock x:Name="PlaceholderText"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
@@ -180,14 +180,14 @@
                            Text="µnotes" />
             </Grid>
 
-            <Grid IsVisible="{Binding SelectedNote, Converter={x:Static ObjectConverters.IsNotNull}}"
+            <Grid IsVisible="{Binding NotesCollection.SelectedNote, Converter={x:Static ObjectConverters.IsNotNull}}"
                   RowDefinitions="Auto, *">
                 <TextBox x:Name="TitleBox"
                          Padding="0"
                          CornerRadius="0"
                          Grid.Row="0"
                          Background="Transparent"
-                         Text="{Binding SelectedNote.Title, FallbackValue=''}"
+                         Text="{Binding NotesCollection.SelectedNote.Title, FallbackValue=''}"
                          FontFamily="{StaticResource StandardFontBold}"
                          BorderThickness="0"
                          VerticalContentAlignment="Center" />
@@ -195,8 +195,8 @@
                                          x:Name="TextEditor"
                                          WordWrap="True"
                                          Background="Transparent"
-                                         IsVisible="{Binding SelectedNote.Document, Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue={x:Null}}"
-                                         Document="{Binding SelectedNote.Document, FallbackValue={x:Null}}"
+                                         IsVisible="{Binding NotesCollection.SelectedNote.Document, Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue={x:Null}}"
+                                         Document="{Binding NotesCollection.SelectedNote.Document, FallbackValue={x:Null}}"
                                          VerticalScrollBarVisibility="Auto"
                                          HorizontalScrollBarVisibility="Disabled"
                                          FontFamily="{StaticResource EditorFont}" />
