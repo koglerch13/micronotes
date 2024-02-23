@@ -21,7 +21,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceInclude Source='/Themes/Lion.axaml' />
+                <ResourceInclude Source='/Themes/Sierra.axaml' />
                 <ResourceInclude Source='/Icons.axaml' />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
