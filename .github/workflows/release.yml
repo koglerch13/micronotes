@@ -21,7 +21,7 @@ jobs:
         run: dotnet publish MicroNotes/MicroNotes.csproj -c Release -o publish -r win-x64 --self-contained true
 
       - name: Zip package
-        run: zip -r MicroNotes_${{ github.event.release.tag_name }}.zip publish -j
+        run: Compress-Archive -Path publish -Destination MicroNotes_${{ github.event.release.tag_name }}.zip
       
       - name: Publish package
         run: gh release upload ${{ github.event.release.tag_name }} MicroNotes_${{ github.event.release.tag_name }}.zip
