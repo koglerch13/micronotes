@@ -1,7 +1,6 @@
 name: Release
 
 on:
-#  workflow_dispatch
   release:
     types: [published]
 
@@ -20,15 +19,11 @@ jobs:
 
       - name: Publish application
         run: dotnet publish MicroNotes/MicroNotes.csproj -c Release -o publish -r win-x64 --self-contained true
-      
-      #- name: debug
-      #  run: tree
 
-      - name: Create release package
-        run: |
-          dotnet tool install -g vpk
-          vpk download github --repoUrl https://github.com/koglerch13/micronotes
-          vpk pack -u app.ckogler.MicroNotes -v ${{ github.event.release.tag_name }} -p publish -e MicroNotes.exe --packTitle MicroNotes
-          vpk upload github --repoUrl https://github.com/koglerch13/micronotes --publish --merge --releaseName "${{ github.event.release.tag_name }}" --token ${{ secrets.GITHUB_TOKEN }}
-          # vpk pack -u app.ckogler.MicroNotes -v 0.0.99 -p publish -e MicroNotes.exe --packTitle MicroNotes
-          # vpk upload github --repoUrl https://github.com/koglerch13/micronotes --publish --releaseName "0.0.99" --token ${{ secrets.GITHUB_TOKEN }}
+      - name: Zip package
+        run: zip -r MicroNotes_${{ github.event.release.tag_name }}.zip publish -j
+      
+      - name: Publish package
+        run: gh release upload ${{ github.event.release.tag_name }} MicroNotes_${{ github.event.release.tag_name }}.zip
+        env: 
+          GITHUB_TOKEN: ${{ github.TOKEN }}
