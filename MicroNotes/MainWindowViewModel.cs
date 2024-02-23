@@ -320,7 +320,7 @@ public class MainWindowViewModel : ReactiveObject
     
     private async Task CheckForUpdates()
     {
-        var updateManager = new UpdateManager(new GithubSource(Constants.UPDATE_URL, "", false));
+        var updateManager = new UpdateManager(new GithubSource(Constants.UPDATE_URL, null, false));
         
         var newVersion = await updateManager.CheckForUpdatesAsync();
         if (newVersion == null)
