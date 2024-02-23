@@ -10,6 +10,7 @@ using Avalonia.Threading;
 using AvaloniaEdit.Document;
 using MicroNotes.MessageBox;
 using ReactiveUI;
+using Velopack;
 
 namespace MicroNotes;
 
@@ -32,10 +33,7 @@ public class MainWindowViewModel : ReactiveObject
         _messageBoxService = messageBoxService;
         _mainWindow = mainWindow;
         _desktop = desktop;
-        _mainWindow.Closing += OnClosing;
-        PropertyChanged += OnPropertyChanged;
-        NotesCollection.PropertyChanged += OnNotesCollectionPropertyChanged;
-
+        
         SaveCommand = ReactiveCommand.CreateFromTask(Save);
         SaveAllCommand = ReactiveCommand.CreateFromTask(SaveAll);
         NewCommand = ReactiveCommand.Create(New);
@@ -47,11 +45,30 @@ public class MainWindowViewModel : ReactiveObject
         SelectPreviousNoteCommand = ReactiveCommand.Create(NotesCollection.SelectPreviousNote);
         FocusEditorCommand = ReactiveCommand.Create(FocusEditor);
         FocusTitleCommand = ReactiveCommand.Create(FocusTitle);
-
+        
+        _mainWindow.Closing += OnClosing;
+        PropertyChanged += OnPropertyChanged;
+        NotesCollection.PropertyChanged += OnNotesCollectionPropertyChanged;
+        
         if (_folderPath != null)
             LoadFiles();
         else
             _ = OpenFolder();
+
+        _ = CheckForUpdates();
+    }
+
+    private async Task CheckForUpdates()
+    {
+        var updateManager = new UpdateManager(Constants.UPDATE_URL);
+        
+        var newVersion = await updateManager.CheckForUpdatesAsync();
+        if (newVersion == null)
+            return; // nothing to update.
+
+        await updateManager.DownloadUpdatesAsync(newVersion);
+
+        updateManager.WaitExitThenApplyUpdates(newVersion, silent: false, restart: false);
     }
 
     private void OnNotesCollectionPropertyChanged(object? sender, PropertyChangedEventArgs e)
