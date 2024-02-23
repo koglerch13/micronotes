@@ -16,7 +16,7 @@ jobs:
       - name: Setup environment
         uses: actions/setup-dotnet@v4
         with: 
-          dotnet-version: 8.0.x
+          dotnet-version: 7.0.x
 
       - name: Publish application
         run: dotnet publish MicroNotes/MicroNotes.csproj -c Release -o publish -r win-x64 --self-contained true
