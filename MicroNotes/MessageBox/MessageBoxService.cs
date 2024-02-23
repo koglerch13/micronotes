@@ -14,6 +14,16 @@ public class MessageBoxService : IMessageBoxService
         _mainWindow = mainWindow;
     }
 
+    public async Task<bool> AskForUpdate()
+    {
+        var result = await MessageBoxManager.GetMessageBoxStandard("Update available",
+                "An update is available.\nDo you want to install it now? The application will restart automatically after installation.",
+                ButtonEnum.YesNo, Icon.None, WindowStartupLocation.CenterOwner)
+            .ShowWindowDialogAsync(_mainWindow);
+
+        return result == ButtonResult.Yes;
+    }
+
     public async Task<bool> ConfirmDiscardUnsavedChanges()
     {
         var result = await MessageBoxManager.GetMessageBoxStandard("Unsaved changes",

@@ -8,4 +8,5 @@ public interface IMessageBoxService
     Task<bool> ConfirmDelete(string title);
     Task WarnForInvalidFilename();
     Task WarnForExistingFilename();
+    Task<bool> AskForUpdate();
 }

@@ -325,10 +325,13 @@ public class MainWindowViewModel : ReactiveObject
         var newVersion = await updateManager.CheckForUpdatesAsync();
         if (newVersion == null)
             return; // nothing to update.
-
-        await updateManager.DownloadUpdatesAsync(newVersion);
-
-        updateManager.WaitExitThenApplyUpdates(newVersion, silent: false, restart: false);
+        
+        var doUpdate = await _messageBoxService.AskForUpdate();
+        if (doUpdate)
+        {
+            await updateManager.DownloadUpdatesAsync(newVersion);
+            updateManager.ApplyUpdatesAndRestart(newVersion);
+        }
     }
     
     private void OnSelectedNoteChanged()
