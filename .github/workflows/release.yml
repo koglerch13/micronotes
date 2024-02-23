@@ -23,7 +23,7 @@ jobs:
         run: |
           dotnet tool install -g vpk
           vpk download github --repoUrl https://github.com/koglerch13/micronotes
-          vpk pack -u app.ckogler.MicroNotes -v ${{ github.event.release.tag_name }} -p publish
+          vpk pack -u app.ckogler.MicroNotes -v ${{ github.event.release.tag_name }} -p MicroNotes/publish -e MicroNotes.exe --packTitle MicroNotes
           vpk upload github --repoUrl https://github.com/koglerch13/micronotes --publish --releaseName "${{ github.event.release.tag_name }}"
 
         
