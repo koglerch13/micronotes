@@ -12,6 +12,7 @@ using AvaloniaEdit.Document;
 using MicroNotes.MessageBox;
 using ReactiveUI;
 using Velopack;
+using Velopack.Sources;
 
 namespace MicroNotes;
 
@@ -59,30 +60,27 @@ public class MainWindowViewModel : ReactiveObject
 
         _ = CheckForUpdates();
     }
-
-    private void OnNotesSearchTextBoxFocusLost(object? sender, RoutedEventArgs e)
+    
+    private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (string.IsNullOrEmpty(NoteSearchQuery))
-            IsNoteSearchActive = false;
+        switch (e.PropertyName)
+        {
+            case nameof(NoteSearchQuery):
+                OnNoteSearchQueryChanged();
+                break;
+        }
     }
-
-    private async Task CheckForUpdates()
-    {
-        var updateManager = new UpdateManager(Constants.UPDATE_URL);
-        
-        var newVersion = await updateManager.CheckForUpdatesAsync();
-        if (newVersion == null)
-            return; // nothing to update.
-
-        await updateManager.DownloadUpdatesAsync(newVersion);
-
-        updateManager.WaitExitThenApplyUpdates(newVersion, silent: false, restart: false);
-    }
-
+    
     private void OnNotesCollectionPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(NotesCollection.SelectedNote))
             OnSelectedNoteChanged();
+    }
+    
+    private void OnNotesSearchTextBoxFocusLost(object? sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(NoteSearchQuery))
+            IsNoteSearchActive = false;
     }
 
     public ReactiveCommand<Unit, Unit> SaveCommand { get; }
@@ -319,17 +317,20 @@ public class MainWindowViewModel : ReactiveObject
         NotesCollection.SetItems(notes);
         NotesCollection.SelectedNote = null;
     }
-
-    private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    
+    private async Task CheckForUpdates()
     {
-        switch (e.PropertyName)
-        {
-            case nameof(NoteSearchQuery):
-                OnNoteSearchQueryChanged();
-                break;
-        }
-    }
+        var updateManager = new UpdateManager(new GithubSource(Constants.UPDATE_URL, "", false));
+        
+        var newVersion = await updateManager.CheckForUpdatesAsync();
+        if (newVersion == null)
+            return; // nothing to update.
 
+        await updateManager.DownloadUpdatesAsync(newVersion);
+
+        updateManager.WaitExitThenApplyUpdates(newVersion, silent: false, restart: false);
+    }
+    
     private void OnSelectedNoteChanged()
     {
         if (NotesCollection.SelectedNote == null)
