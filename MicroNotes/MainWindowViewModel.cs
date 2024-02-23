@@ -10,8 +10,6 @@ using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using AvaloniaEdit.Document;
 using MicroNotes.MessageBox;
-using MicroNotes.UpdateManager;
-using Microsoft.Extensions.Logging;
 using ReactiveUI;
 
 namespace MicroNotes;
@@ -21,8 +19,6 @@ public class MainWindowViewModel : ReactiveObject
     private readonly IClassicDesktopStyleApplicationLifetime _desktop;
     private readonly IMessageBoxService _messageBoxService;
     private readonly MainWindow _mainWindow;
-    private readonly ILogger _logger;
-    private readonly IUpdateManagerService _updateManagerService;
     private string? _folderPath;
 
     private bool _isNoteSearchActive;
@@ -30,17 +26,13 @@ public class MainWindowViewModel : ReactiveObject
 
     public MainWindowViewModel(MainWindow mainWindow,
         IClassicDesktopStyleApplicationLifetime desktop,
-        IMessageBoxService messageBoxService,
-        ILogger logger,
-        IUpdateManagerService updateManagerService)
+        IMessageBoxService messageBoxService)
     {
         NotesCollection = new NotesCollection();
 
         _messageBoxService = messageBoxService;
         _mainWindow = mainWindow;
         _desktop = desktop;
-        _logger = logger;
-        _updateManagerService = updateManagerService;
         
         SaveCommand = ReactiveCommand.CreateFromTask(Save);
         SaveAllCommand = ReactiveCommand.CreateFromTask(SaveAll);
@@ -63,8 +55,6 @@ public class MainWindowViewModel : ReactiveObject
             LoadFiles();
         else
             _ = OpenFolder();
-
-        _ = _updateManagerService.TryUpdate();
     }
     
     private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
