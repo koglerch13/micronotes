@@ -4,3 +4,4 @@ MicroNotes/.DS_Store
 .DS_Store
 .idea
 .vs
+publish/**/*
