@@ -1,6 +1,7 @@
 ﻿using System;
 using Avalonia;
 using Avalonia.ReactiveUI;
+using MicroNotes.Logging;
 using Velopack;
 
 namespace MicroNotes;
@@ -13,12 +14,12 @@ internal static class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        // TODO: add some logging??
+        LoggingSetup.SetupLogger();
         
         VelopackApp
             .Build()
-            .Run();
-        
+            .Run(LoggingSetup.GetLogger());
+
         BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);
     }

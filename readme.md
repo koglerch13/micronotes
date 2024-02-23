@@ -27,6 +27,7 @@ The goal is to develop µnotes in a way that you never have to use a mouse, unle
 
 
 ## To Do
+- [ ] Add logging
 - [ ] Hide title bar (https://github.com/AvaloniaUI/Avalonia/issues/9989)
 
 ### Maybe later

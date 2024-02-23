@@ -10,9 +10,9 @@ using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using AvaloniaEdit.Document;
 using MicroNotes.MessageBox;
+using MicroNotes.UpdateManager;
+using Microsoft.Extensions.Logging;
 using ReactiveUI;
-using Velopack;
-using Velopack.Sources;
 
 namespace MicroNotes;
 
@@ -21,6 +21,8 @@ public class MainWindowViewModel : ReactiveObject
     private readonly IClassicDesktopStyleApplicationLifetime _desktop;
     private readonly IMessageBoxService _messageBoxService;
     private readonly MainWindow _mainWindow;
+    private readonly ILogger _logger;
+    private readonly IUpdateManagerService _updateManagerService;
     private string? _folderPath;
 
     private bool _isNoteSearchActive;
@@ -28,13 +30,17 @@ public class MainWindowViewModel : ReactiveObject
 
     public MainWindowViewModel(MainWindow mainWindow,
         IClassicDesktopStyleApplicationLifetime desktop,
-        IMessageBoxService messageBoxService)
+        IMessageBoxService messageBoxService,
+        ILogger logger,
+        IUpdateManagerService updateManagerService)
     {
         NotesCollection = new NotesCollection();
 
         _messageBoxService = messageBoxService;
         _mainWindow = mainWindow;
         _desktop = desktop;
+        _logger = logger;
+        _updateManagerService = updateManagerService;
         
         SaveCommand = ReactiveCommand.CreateFromTask(Save);
         SaveAllCommand = ReactiveCommand.CreateFromTask(SaveAll);
@@ -58,7 +64,7 @@ public class MainWindowViewModel : ReactiveObject
         else
             _ = OpenFolder();
 
-        _ = CheckForUpdates();
+        _ = _updateManagerService.TryUpdate();
     }
     
     private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -316,22 +322,6 @@ public class MainWindowViewModel : ReactiveObject
 
         NotesCollection.SetItems(notes);
         NotesCollection.SelectedNote = null;
-    }
-    
-    private async Task CheckForUpdates()
-    {
-        var updateManager = new UpdateManager(new GithubSource(Constants.UPDATE_URL, null, false));
-        
-        var newVersion = await updateManager.CheckForUpdatesAsync();
-        if (newVersion == null)
-            return; // nothing to update.
-        
-        var doUpdate = await _messageBoxService.AskForUpdate();
-        if (doUpdate)
-        {
-            await updateManager.DownloadUpdatesAsync(newVersion);
-            updateManager.ApplyUpdatesAndRestart(newVersion);
-        }
     }
     
     private void OnSelectedNoteChanged()
