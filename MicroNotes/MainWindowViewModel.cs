@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using AvaloniaEdit.Document;
@@ -49,6 +50,7 @@ public class MainWindowViewModel : ReactiveObject
         _mainWindow.Closing += OnClosing;
         PropertyChanged += OnPropertyChanged;
         NotesCollection.PropertyChanged += OnNotesCollectionPropertyChanged;
+        _mainWindow.NotesSearchTextBox.LostFocus += OnNotesSearchTextBoxFocusLost;
         
         if (_folderPath != null)
             LoadFiles();
@@ -56,6 +58,12 @@ public class MainWindowViewModel : ReactiveObject
             _ = OpenFolder();
 
         _ = CheckForUpdates();
+    }
+
+    private void OnNotesSearchTextBoxFocusLost(object? sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(NoteSearchQuery))
+            IsNoteSearchActive = false;
     }
 
     private async Task CheckForUpdates()
